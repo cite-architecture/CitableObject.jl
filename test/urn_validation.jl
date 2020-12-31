@@ -1,0 +1,1 @@
+@test_throws ArgumentError validUrn("this:shouldn't:work:at:all!")
