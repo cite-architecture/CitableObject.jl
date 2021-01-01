@@ -8,9 +8,9 @@ function validurn(s::String)::Bool
         throw(ArgumentError("Invalid string `$(s)`: URNs must begin with `urn:`."))
     elseif toplevel[2] != "cite2"
         throw(ArgumentError("Invalid string `$(s)`: the URN type must be `cite2`."))
-    elseif toplevel[3] != ""
+    elseif toplevel[3] == ""
         throw(ArgumentError("Invalid string `$(s)`: CITE namespace cannot be empty."))
-    elseif toplevel[4] != ""
+    elseif toplevel[4] == ""
         throw(ArgumentError("Invalid string `$(s)`: CITE collection identifer cannot be empty."))
     else
         true
