@@ -5,9 +5,9 @@ uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
 [[CitableBase]]
 deps = ["DocStringExtensions", "Documenter", "Test"]
-git-tree-sha1 = "cf8565e3f38e9b8658572d2f091c1b7e22668501"
+git-tree-sha1 = "1e53c511de1a6169abbc43fce0d2a0e8da23cd89"
 uuid = "d6f014bd-995c-41bd-9893-703339864534"
-version = "1.0.0"
+version = "1.1.0"
 
 [[Dates]]
 deps = ["Printf"]
