@@ -3,7 +3,7 @@ module CitableObject
 using CitableBase, Documenter, DocStringExtensions
 
 export Cite2Urn
-export  validurn, namespace
+export  validurn, namespace, workcomponent, objectcomponent
 
 
 include("cite2urn.jl")

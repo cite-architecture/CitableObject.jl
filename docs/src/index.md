@@ -6,6 +6,7 @@ CurrentModule = CitableObject
 ```
 ## Functions
 ```@docs
+namespace(u::Cite2Urn)
 ```
 ## Index
 ```@index
