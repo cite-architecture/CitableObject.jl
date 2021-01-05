@@ -22,10 +22,10 @@ Extract CITE2 work component from a CtsUrn.
 # Examples
 ```julia-repl
 julia>
-workcomponent(Cite2Urn("urn:cite2:hmt:msA.v1:12r"))
+collectioncomponent(Cite2Urn("urn:cite2:hmt:msA.v1:12r"))
 ```
 """
-function workcomponent(u::Cite2Urn)
+function collectioncomponent(u::Cite2Urn)
     allcomponents = components(u.urn)
     allcomponents[4]  
 end
