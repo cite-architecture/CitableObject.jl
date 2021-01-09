@@ -7,7 +7,7 @@ CurrentModule = CitableObject
 ## Functions
 ```@docs
 namespace(u::Cite2Urn)
-workcomponent(u::Cite2Urn)
+collectioncomponent(u::Cite2Urn)
 objectcomponent(u::Cite2Urn)
 isrange(u::Cite2Urn)
 rangebegin(u::Cite2Urn)
