@@ -46,15 +46,61 @@ function hassubref(urn::Cite2Urn)::Bool
     end
 end
 
-
+"""
+$(SIGNATURES)
+Extract subreference from a string.
+"""
 function subref(s::AbstractString)
-    ""
-end
-
-function subref(u::Cite2Urn)
-    if objectcomponent(urn) === nothing
-        nothing
+    segments = split(s,"@")
+    count = size(segments,1)
+    if count == 2
+        sub = segments[2]
+        sub
+    elseif count > 2
+        throw(ArgumentError("Invalid subreference syntax `$(s)`.  Too many `@` characters."))
     else
-        subref(u)
+        ""
     end
 end
+
+"""
+$(SIGNATURES)
+Extract subreference from a URN.
+"""
+function subref(u::Cite2Urn)
+    if objectcomponent(u) === nothing
+        nothing
+    else
+        subref(objectcomponent(u))
+    end
+end
+
+
+"""
+$(SIGNATURES)
+Remove any subreference substrings in a string.
+If `s` is a range expression, separately drop subreference
+from each of range-begin and range-end parts.
+"""
+function dropsubref(s::AbstractString)
+    if isrange(s)
+        r1parts = split(rangebegin(s),"@")
+        r2parts = split(rangeend(s),"@")
+        r1parts[1] * "-" * r2parts[1]
+    else 
+        parts = split(s, "@")
+        parts[1]
+    end
+end
+
+
+"""
+$(SIGNATURES)
+Remove any subreferences from a CtsUrn.
+"""
+function dropsubref(u::Cite2Urn)
+    trimmed = dropsubref(objectcomponent(u))
+    dropobject(u) * trimmed
+    #trimmed
+end
+
