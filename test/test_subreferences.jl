@@ -19,4 +19,9 @@ end
     @test subref(imgwroistring) == roi
     imgwroi = Cite2Urn(imgwroistring)
     @test subref(imgwroi) == roi
+
+    simpleobject = Cite2Urn("urn:cite2:ecod:bern88imgs.v1:bern88_004v")
+    @test dropsubref(simpleobject) == simpleobject
+
+
 end
