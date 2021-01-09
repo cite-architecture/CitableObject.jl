@@ -4,6 +4,10 @@ CurrentModule = CitableObject
 ```
 ```@contents
 ```
+## Types
+```@docs
+Cite2Urn
+```
 ## Functions
 ```@docs
 namespace(u::Cite2Urn)
