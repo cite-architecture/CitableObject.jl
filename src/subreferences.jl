@@ -100,7 +100,6 @@ Remove any subreferences from a CtsUrn.
 """
 function dropsubref(u::Cite2Urn)
     trimmed = dropsubref(objectcomponent(u))
-    dropobject(u) * trimmed
-    #trimmed
+    Cite2Urn(dropobject(u).urn * trimmed)
 end
 
