@@ -5,7 +5,8 @@ Pkg.activate(".")
 Pkg.instantiate()
 
 
-using Documenter, DocStringExtensions, CitableObject
+using Documenter, DocStringExtensions
+using CitableObject
 
 makedocs(
     sitename = "CitableObject.jl",
