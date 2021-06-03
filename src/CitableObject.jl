@@ -3,9 +3,9 @@ module CitableObject
 using CitableBase, Documenter, DocStringExtensions
 
 export Cite2Urn
-export  validurn, namespace, collectioncomponent, objectcomponent
+export validurn, namespace, collectioncomponent, objectcomponent
 export collectionid, versionid
-export dropobject #, addobject, dropversion, addversion
+export dropobject, addobject, dropversion, addversion
 export isrange, rangebegin, rangeend
 export hassubref, subref, dropsubref
 
