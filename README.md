@@ -9,11 +9,11 @@ A Julia module for working with citable objects identified by Cite2Urn.
 ### Working with CITE2 URNs.
 
 
-- [ ] adding/dropping the object identifier of a Cite2Urn
-- [ ] adding/dropping the version part of a Cite2Urn's collection hierarchy
+- [x] adding/dropping the object identifier of a Cite2Urn
+- [x] adding/dropping the version part of a Cite2Urn's collection hierarchy
 - [ ] identifying ranges
 - [ ] extracting beginning and ending components of ranges
-- [ ] identifying and extracting extended object identifers *(subreferences)
+- [ ] identifying and extracting extended object identifers (*subreferences*)
 
 
 ## Working with a collection of citable objects
