@@ -1,7 +1,7 @@
 # CitableObject.jl
 
 
-A Julia module for working with citable objects identified by Cite2Urn.
+A Julia module for working with citable objects identified by `Cite2Urn`.
 
 ## Plans for version 1.0
 
