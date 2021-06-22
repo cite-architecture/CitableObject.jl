@@ -1,27 +1,7 @@
 # CitableObject.jl Documentation
-```@meta
-CurrentModule = CitableObject
-```
-```@contents
-```
-## Types
-```@docs
-Cite2Urn
-```
-## Functions
-```@docs
-namespace
-collectioncomponent
-objectcomponent
-isrange
-rangebegin
-rangeend
-hassubref
-subref
-dropsubref
-dropversion
-addversion
-```
-## Index
-```@index
-```
+
+
+The CitableObject.jl module defines functions to work with `Cite2Urn`s. 
+
+!!! warning
+CitableObject.jl is in very early phases of development and the currently implemented parts of the module are inadequately tested.

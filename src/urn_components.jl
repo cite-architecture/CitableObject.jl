@@ -48,3 +48,12 @@ function objectcomponent(u::Cite2Urn)
         allcomponents[5]
     end
 end
+
+"""
+$(SIGNATURES)
+Extract parts ofr CITE2 object component from a CtsUrn.
+"""
+function collectionparts(u::Cite2Urn)
+    component = collectioncomponent(u)
+    split(component, ".")
+end

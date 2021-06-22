@@ -14,6 +14,7 @@ export dropobject, addobject, dropversion, addversion
 export isrange, rangebegin, rangeend
 export hassubref, subref, dropsubref
 export dropversion, addversion
+export urncontains
 
 include("cite2urn.jl")
 include("validurn.jl")
@@ -22,6 +23,6 @@ include("urnparts.jl")
 include("urn_manipulation.jl")
 include("ranges.jl")
 include("subreferences.jl")
-
+include("urn_comparison.jl")
 
 end # module

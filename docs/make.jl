@@ -11,7 +11,8 @@ using CitableObject
 makedocs(
     sitename = "CitableObject.jl",
     pages = [
-        "Home" => "index.md"
+        "Home" => "index.md",
+        "API documentation" => "apis.md"
     ]
     )
 
