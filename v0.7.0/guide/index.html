@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>User&#39;s guide · CitableObject.jl</title><script data-outdated-warner src="../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.039/juliamono-regular.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../">CitableObject.jl</a></span></div><form class="docs-search" action="../search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li><a class="tocitem" href="../">Overview</a></li><li class="is-active"><a class="tocitem" href>User&#39;s guide</a><ul class="internal"><li><a class="tocitem" href="#Components-and-parts"><span>Components and parts</span></a></li><li><a class="tocitem" href="#URN-manipulation"><span>URN manipulation</span></a></li><li><a class="tocitem" href="#URN-comparison"><span>URN comparison</span></a></li><li><a class="tocitem" href="#Ranges"><span>Ranges</span></a></li><li><a class="tocitem" href="#Extended-identifiers-(&quot;subreferences&quot;)"><span>Extended identifiers (&quot;subreferences&quot;)</span></a></li></ul></li><li><a class="tocitem" href="../apis/">API documentation</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>User&#39;s guide</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>User&#39;s guide</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/cite-architecture/CitableObject.jl/blob/master/docs/src/guide.md" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="Users&#39;-guide:-the-Cite2Urn"><a class="docs-heading-anchor" href="#Users&#39;-guide:-the-Cite2Urn">Users&#39; guide: the <code>Cite2Urn</code></a><a id="Users&#39;-guide:-the-Cite2Urn-1"></a><a class="docs-heading-anchor-permalink" href="#Users&#39;-guide:-the-Cite2Urn" title="Permalink"></a></h1><p>The <code>CitableObject</code> module defines functions for working with <code>Cite2Urn</code>s.  (The API documentation has a more complete list.) Construct a <code>Cite2Urn</code> from a string value.</p><pre><code class="language-julia hljs">using CitableObject
+pageurn = Cite2Urn(&quot;urn:cite2:hmt:msA.v1:12r&quot;)
+
+# output
+
+urn:cite2:hmt:msA.v1:12r</code></pre><h2 id="Components-and-parts"><a class="docs-heading-anchor" href="#Components-and-parts">Components and parts</a><a id="Components-and-parts-1"></a><a class="docs-heading-anchor-permalink" href="#Components-and-parts" title="Permalink"></a></h2><p>Include the <code>CitableBase</code> module for to use the generic <code>components</code> and <code>parts</code> functions.  These return Vectors of string values. </p><pre><code class="language-julia hljs">using CitableBase
+components(pageurn)
+
+# output
+
+5-element Vector{SubString{String}}:
+ &quot;urn&quot;
+ &quot;cite2&quot;
+ &quot;hmt&quot;
+ &quot;msA.v1&quot;
+ &quot;12r&quot;</code></pre><p>A <code>Cite2Urn</code> always has five top-level components. It is legal for the object component to be empty.</p><pre><code class="language-julia hljs">pagecollection =  Cite2Urn(&quot;urn:cite2:hmt:msA.v1:&quot;)
+components(pagecollection)
+
+# output
+
+5-element Vector{SubString{String}}:
+ &quot;urn&quot;
+ &quot;cite2&quot;
+ &quot;hmt&quot;
+ &quot;msA.v1&quot;
+ &quot;&quot;</code></pre><p>You can use the following functions to extract top-level components by name.  They return a string value.</p><pre><code class="language-julia hljs">namespace(pageurn)
+
+# output
+
+&quot;hmt&quot;</code></pre><pre><code class="language-julia hljs">collectioncomponent(pageurn)
+
+# output
+
+&quot;msA.v1&quot;</code></pre><pre><code class="language-julia hljs">objectcomponent(pageurn)
+
+# output
+
+&quot;12r&quot;</code></pre><p>You can also retrieve individual parts of the collection component:</p><pre><code class="language-julia hljs">collectionid(pageurn)
+
+# output
+
+&quot;msA&quot;</code></pre><pre><code class="language-julia hljs">versionid(pageurn)
+
+# output
+
+&quot;v1&quot;</code></pre><h2 id="URN-manipulation"><a class="docs-heading-anchor" href="#URN-manipulation">URN manipulation</a><a id="URN-manipulation-1"></a><a class="docs-heading-anchor-permalink" href="#URN-manipulation" title="Permalink"></a></h2><p>Several functions use a <code>Cite2Urn</code> to create a new, modified <code>Cite2Urn</code>.</p><pre><code class="language-julia hljs">dropversion(pageurn)
+
+# output
+
+urn:cite2:hmt:msA:12r</code></pre><p>Verify that the result is a new <code>Cite2Urn</code>.</p><pre><code class="language-julia hljs">dropversion(pageurn) |&gt; typeof
+
+# output
+
+Cite2Urn</code></pre><pre><code class="language-julia hljs">addversion(pageurn, &quot;v2&quot;)
+
+# output
+
+urn:cite2:hmt:msA.v2:12r</code></pre><pre><code class="language-julia hljs">dropobject(pageurn)
+
+# output
+
+urn:cite2:hmt:msA.v1:</code></pre><pre><code class="language-julia hljs">addobject(pageurn, &quot;1r&quot;)
+
+# output
+
+urn:cite2:hmt:msA.v1:1r</code></pre><h2 id="URN-comparison"><a class="docs-heading-anchor" href="#URN-comparison">URN comparison</a><a id="URN-comparison-1"></a><a class="docs-heading-anchor-permalink" href="#URN-comparison" title="Permalink"></a></h2><p>In addition to comparing for equality with <code>==</code>, you can compare a pair of CITE2 URNs for URN containment or URN similarity.</p><pre><code class="nohighlight hljs">urncontains(pagecollection, pageurn)
+
+# output
+
+true</code></pre><p>Two URNs are similar if they are equal, or if either contains the other.</p><pre><code class="nohighlight hljs">urnsimilar(pagecollection, pageurn)
+
+# output
+
+true</code></pre><p>Note that this definition means the function is symmetric.</p><pre><code class="nohighlight hljs">urnsimilar(pagecollection, pageurn) == urnsimilar(pageurn, pagecollection)
+
+# output
+
+true</code></pre><h2 id="Ranges"><a class="docs-heading-anchor" href="#Ranges">Ranges</a><a id="Ranges-1"></a><a class="docs-heading-anchor-permalink" href="#Ranges" title="Permalink"></a></h2><p><code>Cite2Urn</code>s can identify <em>ranges</em> (sequences) of objects in ordered collections.</p><pre><code class="language-julia hljs">pages = Cite2Urn(&quot;urn:cite2:hmt:msA.v1:1r-11v&quot;)
+isrange(pages)
+
+# output
+
+true</code></pre><pre><code class="language-julia hljs">rangebegin(pages)
+
+# output
+
+&quot;1r&quot;</code></pre><pre><code class="language-julia hljs">rangeend(pages)
+
+# output
+
+&quot;11v&quot;</code></pre><h2 id="Extended-identifiers-(&quot;subreferences&quot;)"><a class="docs-heading-anchor" href="#Extended-identifiers-(&quot;subreferences&quot;)">Extended identifiers (&quot;subreferences&quot;)</a><a id="Extended-identifiers-(&quot;subreferences&quot;)-1"></a><a class="docs-heading-anchor-permalink" href="#Extended-identifiers-(&quot;subreferences&quot;)" title="Permalink"></a></h2><p>In some collections, extended identifiers (&quot;subreferences&quot;) may be appropriate.  You can determine if a <code>Cite2Urn</code> includes an extended identifier, extract the subreference, or drop it.</p><pre><code class="language-julia hljs">imgurn = Cite2Urn(&quot;urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2005,0.2073,0.1774,0.02351&quot;)
+hassubref(imgurn)
+
+# output
+
+true</code></pre><p>The <code>subref</code> functions returns a string value.</p><pre><code class="language-julia hljs">subref(imgurn)
+
+# output
+
+&quot;0.2005,0.2073,0.1774,0.02351&quot;</code></pre><p>The <code>dropsubref</code> function returns a new <code>Cite2Urn</code>.</p><pre><code class="language-julia hljs">dropsubref(imgurn)
+
+# output
+
+urn:cite2:hmt:vaimg.2017a:VA012RN_0013</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../">« Overview</a><a class="docs-footer-nextpage" href="../apis/">API documentation »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 0.27.6 on <span class="colophon-date" title="Wednesday 15 September 2021 21:06">Wednesday 15 September 2021</span>. Using Julia version 1.5.4.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
