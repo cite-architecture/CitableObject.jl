@@ -1,4 +1,4 @@
-"True is s is a valid Cite2Urn."
+"True if s is a valid Cite2Urn."
 function validurn(s::AbstractString)::Bool
     toplevel = components(s)
     # urn:cite2:ns:coll:obj
