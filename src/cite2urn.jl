@@ -1,5 +1,5 @@
 
-"Implementation of the Cite Object URN. See  [http://cite-architecture.org/ctsurn/](http://cite-architecture.org/ctsurn/)."
+"Implementation of the Cite Object URN. See  [http://cite-architecture.org/cite2urn/](http://cite-architecture.org/cite2urn/)."
 struct Cite2Urn <: Urn
     urn::AbstractString
     function Cite2Urn(s)
@@ -12,19 +12,19 @@ struct Cite2Urn <: Urn
     end
 end
 
-"""Override Base.show for Cite2Urn.
+"""Override `Base.show` for `Cite2Urn`.
 
 $(SIGNATURES)
 """
 function show(io::IO, urn::Cite2Urn)
-    print(io,urn.urn )
+    print(io,urn.urn)
 end
 
 
-"""Override Base.print for Cite2Urn.
+"""Override `Base.print` for `Cite2Urn`.
 
 $(SIGNATURES)
 """
 function print(io::IO, urn::Cite2Urn)
-    print(io,urn.urn )
+    print(io,urn.urn)
 end

@@ -6,18 +6,23 @@ import Base: show
 using CitableBase 
 import CitableBase: dropversion
 import CitableBase: addversion
+import CitableBase: urncontains
+import CitableBase: urnmatches
 
 using Documenter, DocStringExtensions
 
 
 export Cite2Urn
+export dropversion, addversion
+export urncontains, urnmatches
+
 export validurn, namespace, collectioncomponent, objectcomponent
 export collectionid, versionid
-export dropobject, addobject, dropversion, addversion
+export dropobject, addobject
 export isrange, rangebegin, rangeend
 export hassubref, subref, dropsubref
-export dropversion, addversion
-export urncontains
+
+
 
 include("cite2urn.jl")
 include("validurn.jl")

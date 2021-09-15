@@ -9,7 +9,7 @@ A `Cite2Urn` can be instantiated from a string value. The generic `show` functio
 ```jldoctest urn
 using CitableObject
 urn = Cite2Urn("urn:cite2:hmt:msA.v1:12r")
-show(urn)
+print(urn)
 
 # output
 
