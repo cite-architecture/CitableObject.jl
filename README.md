@@ -13,7 +13,7 @@ The `Cite2Urn` implements the `Urn` abstraction (from the [CitableBase module](h
 
 - [x] adding/dropping the object identifier of a Cite2Urn
 - [x] adding/dropping the version part of a Cite2Urn's collection hierarchy
-- [ ] identifying ranges
-- [ ] extracting beginning and ending components of ranges
-- [ ] identifying and extracting extended object identifers (*subreferences*)
+- [x] identifying ranges
+- [x] extracting beginning and ending components of ranges
+- [x] identifying and extracting extended object identifers (*subreferences*)
 
