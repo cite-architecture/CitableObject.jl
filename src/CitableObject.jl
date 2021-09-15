@@ -7,14 +7,17 @@ using CitableBase
 import CitableBase: dropversion
 import CitableBase: addversion
 import CitableBase: urncontains
-import CitableBase: urnmatches
+import CitableBase: urnsimilar
+import CitableBase: urn
+import CitableBase: label
+import CitableBase: cex
 
 using Documenter, DocStringExtensions
 
 
 export Cite2Urn
 export dropversion, addversion
-export urncontains, urnmatches
+export urncontains, urnsimilar
 
 export validurn, namespace, collectioncomponent, objectcomponent
 export collectionid, versionid
