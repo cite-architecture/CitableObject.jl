@@ -1,5 +1,8 @@
 module CitableObject
 
+import Base: print
+import Base: show
+
 using CitableBase 
 import CitableBase: dropversion
 import CitableBase: addversion

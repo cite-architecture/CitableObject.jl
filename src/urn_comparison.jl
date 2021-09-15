@@ -1,15 +1,5 @@
 
 
-"""
-$(SIGNATURES)
-Override equality operator for type-specific test.
-"""
-
-#=
-function ==(urn1::Cite2Urn, urn2::Cite2Urn)
-    urn1.urn == urn2.urn
-end
-=#
 
 """
 $(SIGNATURES)

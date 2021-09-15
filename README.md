@@ -1,8 +1,8 @@
 # CitableObject.jl
 
-A Julia module for working with citable objects identified by `Cite2Urn`.
+A Julia module for working with citable objects identified by `Cite2Urn`.  
 
-(`CitableText.jl` is a parallel module for working with citable passages of texts identified by `CtsUrn`.)
+The `Cite2Urn` implements the `Urn` abstraction (from the [CitableBase module](https://cite-architecture.github.io/CitableBase.jl/stable/).  ([`CitableText.jl`](https://cite-architecture.github.io/CitableText.jl/stable/) is a parallel module for working with citable passages of texts identified by `CtsUrn`.)
 
 
 ## Plans for version 1.0

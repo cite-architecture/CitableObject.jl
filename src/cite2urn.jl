@@ -11,3 +11,20 @@ struct Cite2Urn <: Urn
         new(s)
     end
 end
+
+"""Override Base.show for Cite2Urn.
+
+$(SIGNATURES)
+"""
+function show(io::IO, urn::Cite2Urn)
+    print(io,urn.urn )
+end
+
+
+"""Override Base.print for Cite2Urn.
+
+$(SIGNATURES)
+"""
+function print(io::IO, urn::Cite2Urn)
+    print(io,urn.urn )
+end
