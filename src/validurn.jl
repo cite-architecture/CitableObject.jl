@@ -1,6 +1,7 @@
 "True if s is a valid Cite2Urn."
 function validurn(s::AbstractString)::Bool
     toplevel = components(s)
+   
     # urn:cite2:ns:coll:obj
     if size(toplevel, 1) != 5
         throw(ArgumentError("Invalid string `$(s)`: Cite2Urns must have five top-level components."))
@@ -12,6 +13,8 @@ function validurn(s::AbstractString)::Bool
         throw(ArgumentError("Invalid string `$(s)`: CITE namespace cannot be empty."))
     elseif toplevel[4] == ""
         throw(ArgumentError("Invalid string `$(s)`: CITE collection identifer cannot be empty."))
+    elseif length(split(toplevel[4], ".")) > 3
+        throw(ArgumentError("Invalid string `$(s)`: too many parts in collection component $(toplevel[4])."))
     else
         true
     end
