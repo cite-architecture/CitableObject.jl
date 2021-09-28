@@ -20,8 +20,9 @@ export dropversion, addversion
 export urncontains, urnsimilar
 
 export validurn, namespace, collectioncomponent, objectcomponent
-export collectionid, versionid
+export collectionid, versionid, propertyid
 export dropobject, addobject
+export dropproperty, addproperty
 export isrange, rangebegin, rangeend
 export hassubref, subref, dropsubref
 

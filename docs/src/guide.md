@@ -91,6 +91,18 @@ versionid(pageurn)
 "v1"
 ```
 
+```jldoctest urn
+propurn =  Cite2Urn("urn:cite2:hmt:msA.v1.side:12r")
+propertyid(propurn)
+
+# output
+
+"side"
+```
+
+
+
+
 ## URN manipulation
 
 Several functions use a `Cite2Urn` to create a new, modified `Cite2Urn`.
@@ -143,8 +155,22 @@ urn:cite2:hmt:msA.v1:1r
 ```
 
 
+```jldoctest urn
+dropproperty(propurn)
+
+# output
+
+urn:cite2:hmt:msA.v1:12r
+```
 
 
+```jldoctest urn
+addproperty(pageurn, "side")
+
+# output
+
+urn:cite2:hmt:msA.v1.side:12r
+```
 
 ## URN comparison
 
