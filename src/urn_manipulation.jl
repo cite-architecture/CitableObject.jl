@@ -53,8 +53,14 @@ function dropproperty(u::Cite2Urn)::Cite2Urn
     save = components(u.urn)[1:3]
     newversion = string(collectionid(u), ".", versionid(u))
     push!(save, newversion)
-    push!(save, objectcomponent(u))
-    join(save, ":") |> Cite2Urn
+    if isnothing(objectcomponent(u)) 
+        rejoined = join(save, ":") * ":"
+        rejoined |> Cite2Urn
+    else
+        push!(save, objectcomponent(u))
+        join(save, ":") |> Cite2Urn
+    end
+    
 end
 
 
