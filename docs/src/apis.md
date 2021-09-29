@@ -23,6 +23,8 @@ subref
 dropsubref
 dropversion
 addversion
+dropproperty
+addproperty
 urncontains
 ```
 ## Index
