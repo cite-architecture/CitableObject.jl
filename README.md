@@ -1,3 +1,6 @@
+![build](https://github.com/cite-architecture/CitableObject.jl/actions/workflows/Documentation.yml/badge.svg)
+
+
 # CitableObject.jl
 
 A Julia module for working with citable objects identified by `Cite2Urn`.  
