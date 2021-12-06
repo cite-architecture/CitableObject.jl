@@ -32,6 +32,6 @@ end
 $(SIGNATURES)
 Override `similar` function to be true if `urn1` and `urn1` are similar by URN logic.
 """
-function similar(urn1::Cite2Urn, urn2::Cite2Urn)
+function urnsimilar(urn1::Cite2Urn, urn2::Cite2Urn)
     urn1.urn == urn2.urn || urncontains(urn1, urn2) || urncontains(urn2, urn1)
 end
