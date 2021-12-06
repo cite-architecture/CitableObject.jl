@@ -10,6 +10,7 @@ The `Cite2Urn` implements the `Urn` abstraction (from the [CitableBase module](h
 
 ## Plans for version 1.0
 
+Countdown to 1.0:  see the [1.0 milestone](https://github.com/cite-architecture/CitableObject.jl/milestone/1) in the issue tracker.
 
 ### Working with CITE2 URNs.
 
