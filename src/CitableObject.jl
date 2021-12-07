@@ -6,6 +6,7 @@ import Base: show
 using CitableBase 
 import CitableBase: dropversion
 import CitableBase: addversion
+import CitableBase: urnequals
 import CitableBase: urncontains
 import CitableBase: urnsimilar
 import CitableBase: urn
@@ -17,7 +18,7 @@ using Documenter, DocStringExtensions
 
 export Cite2Urn
 export dropversion, addversion
-export urncontains, urnsimilar
+export urnequals, urncontains, urnsimilar
 
 export validurn, namespace, collectioncomponent, objectcomponent
 export collectionid, versionid, propertyid

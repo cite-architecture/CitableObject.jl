@@ -4,13 +4,15 @@
 ```@meta
 CurrentModule = CitableObject
 ```
-```@contents
-```
+
 ## Types
 ```@docs
 Cite2Urn
 ```
 ## Functions
+
+Manipulating `Cite2Urn`s:
+
 ```@docs
 namespace
 collectioncomponent
@@ -25,8 +27,13 @@ dropversion
 addversion
 dropproperty
 addproperty
+```
+
+Comparing a pair of `Cite2Urn`s:
+
+```@docs
 urncontains
+urnequals
+urnsimilar
 ```
-## Index
-```@index
-```
+

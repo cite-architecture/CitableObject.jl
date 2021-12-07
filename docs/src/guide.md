@@ -176,7 +176,7 @@ urn:cite2:hmt:msA.v1.side:12r
 
 In addition to comparing for equality with `==`, you can compare a pair of CITE2 URNs for URN containment or URN similarity.
 
-```
+```jldoctest urn
 urncontains(pagecollection, pageurn)
 
 # output
@@ -186,7 +186,7 @@ true
 
 Two URNs are similar if they are equal, or if either contains the other.
 
-```
+```jldoctest urn
 urnsimilar(pagecollection, pageurn)
 
 # output
@@ -196,8 +196,37 @@ true
 
 Note that this definition means the function is symmetric.
 
-```
+```jldoctest urn
 urnsimilar(pagecollection, pageurn) == urnsimilar(pageurn, pagecollection)
+
+# output
+
+true
+```
+
+
+For `Cite2Urn`s, `urnequals` and `==` return identical results.
+
+```jldoctest urn
+urnequals(pagecollection, pageurn)
+
+# output
+
+false
+```
+
+
+```jldoctest urn
+pagecollection == pageurn
+
+# output
+
+false
+```
+
+
+```jldoctest urn
+urnsimilar(pagecollection,dropobject(pageurn))
 
 # output
 

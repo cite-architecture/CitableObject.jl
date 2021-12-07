@@ -35,3 +35,12 @@ Override `similar` function to be true if `urn1` and `urn1` are similar by URN l
 function urnsimilar(urn1::Cite2Urn, urn2::Cite2Urn)
     urn1.urn == urn2.urn || urncontains(urn1, urn2) || urncontains(urn2, urn1)
 end
+
+
+"""
+$(SIGNATURES)
+Override `urnequals` function for `Cite2Urn`s.
+"""
+function urnequals(urn1::Cite2Urn, urn2::Cite2Urn)
+    urn1.urn == urn2.urn
+end
