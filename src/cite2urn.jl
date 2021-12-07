@@ -12,6 +12,9 @@ struct Cite2Urn <: Urn
     end
 end
 
+UrnComparisonTrait(Cite2Urn)  = UrnComparable()
+
+
 """Override `Base.show` for `Cite2Urn`.
 
 $(SIGNATURES)
