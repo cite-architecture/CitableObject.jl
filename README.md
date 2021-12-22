@@ -1,7 +1,7 @@
-![build](https://github.com/cite-architecture/CitableObject.jl/actions/workflows/Documentation.yml/badge.svg) [![version](https://juliahub.com/docs/CitableObject/version.svg)](https://juliahub.com/ui/Packages/CitableObject/bOWvg)
+![build](https://github.com/cite-architecture/CitableObject.jl/actions/workflows/Documentation.yml/badge.svg) 
 
 
-# CitableObject.jl
+# CitableObject.jl [![version](https://juliahub.com/docs/CitableObject/version.svg)](https://juliahub.com/ui/Packages/CitableObject/bOWvg)
 
 A Julia module for working with citable objects identified by `Cite2Urn`.  
 
