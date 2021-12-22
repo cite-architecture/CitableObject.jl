@@ -1,4 +1,4 @@
-![build](https://github.com/cite-architecture/CitableObject.jl/actions/workflows/Documentation.yml/badge.svg)
+![build](https://github.com/cite-architecture/CitableObject.jl/actions/workflows/Documentation.yml/badge.svg) [![version](https://juliahub.com/docs/CitableObject/version.svg)](https://juliahub.com/ui/Packages/CitableObject/bOWvg)
 
 
 # CitableObject.jl
