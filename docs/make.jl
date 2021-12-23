@@ -18,7 +18,10 @@ makedocs(
     sitename = "CitableObject.jl",
     pages = [
         "Overview" => "index.md",
-        "User's guide" => "guide.md",
+        "User's guide" => Any[
+            "The Cite2Urn" => "guide.md",
+            "The CitableByCite2Urn trait" => "trait.md"
+        ],
         "API documentation" => "apis.md"
     ]
     )

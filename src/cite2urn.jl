@@ -12,6 +12,10 @@ struct Cite2Urn <: Urn
     end
 end
 
+
+"""A value of `CitableBase.CitableTrait` that can be used for content citable by `CtsUrn`.
+"""
+struct CitableByCite2Urn <: CitableTrait end
 UrnComparisonTrait(Cite2Urn)  = UrnComparable()
 
 

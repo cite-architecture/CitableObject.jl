@@ -4,21 +4,20 @@ import Base: print
 import Base: show
 
 using CitableBase 
+import CitableBase: CitableTrait
+
 import CitableBase: dropversion
 import CitableBase: addversion
+
+import CitableBase: UrnComparisonTrait
 import CitableBase: urnequals
 import CitableBase: urncontains
 import CitableBase: urnsimilar
-import CitableBase: urn
-import CitableBase: label
-import CitableBase: cex
 
 using Documenter, DocStringExtensions
 
-
 export Cite2Urn
-export dropversion, addversion
-export urnequals, urncontains, urnsimilar
+export CitableByCite2Urn
 
 export validurn, namespace, collectioncomponent, objectcomponent
 export collectionid, versionid, propertyid
