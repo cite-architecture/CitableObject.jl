@@ -8,6 +8,8 @@ CurrentModule = CitableObject
 ## Types
 ```@docs
 Cite2Urn
+CitableByCite2Urn
+Cite2UrnComparable
 ```
 ## Functions
 

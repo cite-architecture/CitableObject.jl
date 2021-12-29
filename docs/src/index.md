@@ -6,14 +6,9 @@ The CitableObject.jl module defines the `Cite2Urn`, a URN notation for canonical
 A `Cite2Urn` can be instantiated from a string value. The generic `show` function displays this value to an IOStream.
 
 
-```jldoctest urn
+```@example
 using CitableObject
 urn = Cite2Urn("urn:cite2:hmt:msA.v1:12r")
-print(urn)
-
-# output
-
-urn:cite2:hmt:msA.v1:12r
 ```
 
 The following pages include:

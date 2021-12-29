@@ -1,23 +1,23 @@
 module CitableObject
+using Documenter, DocStringExtensions
 
-import Base: print
 import Base: show
 
 using CitableBase 
-import CitableBase: CitableTrait
 
 import CitableBase: dropversion
 import CitableBase: addversion
 
-import CitableBase: UrnComparisonTrait
+import CitableBase: urncomparisontrait
 import CitableBase: urnequals
 import CitableBase: urncontains
 import CitableBase: urnsimilar
 
-using Documenter, DocStringExtensions
+
 
 export Cite2Urn
 export CitableByCite2Urn
+export Cite2UrnComparable
 
 export validurn, namespace, collectioncomponent, objectcomponent
 export collectionid, versionid, propertyid

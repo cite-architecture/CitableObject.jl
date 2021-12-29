@@ -1,10 +1,10 @@
 # The `CitableTrait`
 
-The `CitableBase` package defines a `CitableTrait`.  Types implementing the trait implement a function, `urn`, that identifies an object by a value that is a subtype of `Urn`.
+The `CitableBase` package defines a `CitableTrait`. For any Julia type, the value of the trait is identified by a singleton value returned by the `citabletrait` function. By default, the value of the trait is` NotCitable()`. (See a fuller discussion in the [documentation for `CitableBase`](https://cite-architecture.github.io/CitableBase.jl/stable/citable/#Implementing-the-CitableTrait)).
 
-By default, the value of the trait for a subtype of `Urn` is `Citable`.  There are times, however, when it may be useful to have a more specific value for the trait. For that situation, the `CitableText` package defines the `CitableByCite2Urn` type.  Here is an example of how you can use it.
+The `CitableObject` package defines a singleton-type `CitableByCite2Urn` which you use as the value for `CitableTrait` for your own types of content identified by `Cite2Urn`s. Here is a brief example.
 
-Define your custom type, import `CitableTrait`, and assign it the value `CitableByCite2Urn()` for your new type.  Implement the `urn` function.
+First define your type with a `Cite2Urn`.
 
 ```@example trait
 using CitableBase, CitableObject
@@ -13,36 +13,49 @@ struct TinyThing <: Citable
     urn::Cite2Urn
     data::AbstractString
 end
+citeurn = Cite2Urn("urn:cite2:hmt:msA.v1:12r")
+data = "Manuscript page data"
+tiny = TinyThing(citeurn, data)
+```
 
+
+Override the `citabletrait` function when its parameter is the type `TinyThing`, and return the concrete value `CitableByCite2Urn().
+
+
+```@example trait
+import CitableBase: citabletrait
+function citabletrait(::Type{TinyThing})
+    CitableByCite2Urn()
+end
+```
+
+Check the result:
+
+
+```@example trait
+citabletrait(typeof(tiny))
+```
+
+
+Now you can use the citable function (from `CitableBase`) to check whether individual objects of your new type are citable.
+
+```@example trait
+citable(tiny)
+```
+
+At this point, you can also implement the required functions of the CitableTrait, `urn` and `label`.
+
+```
 import CitableBase: urn
 function urn(tinyThing::TinyThing)
     tinyThing.urn
 end
 
-import CitableBase: CitableTrait
-CitableTrait(::Type{TinyThing}) = CitableByCite2Urn()
+import CitableBase: label
+
+function urn(tinyThing::TinyThing)
+    string(tinyThing.urn) * " with data " * tinyThing.data
+end
 ```
 
 
-Now when we create objects of type `TinyThing`, we can use the `citableobject` function from `CitableBase` to find out if our objets of our type are citable by some type of URN.
-
-```@example trait
-citeurn = Cite2Urn("urn:cite2:hmt:msA.v1:12r")
-data = "Manuscript page data"
-tiny = TinyThing(citeurn, data)
-if citable(tiny)
-    urn(tiny)
-else
-    nothing
-end        
-```
-
-But we can also more specifically check the value of the `CitableTrait`.
-
-```@example trait
-if CitableTrait(typeof(tiny)) == CitableByCite2Urn()
-    "Citation is by Cite2Urn"
-else
-    "Citation is NOT by Cite2Urn"
-end    
-```
