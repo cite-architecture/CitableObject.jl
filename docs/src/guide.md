@@ -2,102 +2,56 @@
 
 The `CitableObject` module defines functions for working with `Cite2Urn`s.  (The API documentation has a more complete list.) Construct a `Cite2Urn` from a string value.
 
-```jldoctest urn
+```@example urn
 using CitableObject
 pageurn = Cite2Urn("urn:cite2:hmt:msA.v1:12r")
-
-# output
-
-urn:cite2:hmt:msA.v1:12r
 ```
 
 ## Components and parts
 
 Include the `CitableBase` module for to use the generic `components` and `parts` functions.  These return Vectors of string values. 
 
-```jldoctest urn
+```@example urn
 using CitableBase
 components(pageurn)
-
-# output
-
-5-element Vector{SubString{String}}:
- "urn"
- "cite2"
- "hmt"
- "msA.v1"
- "12r"
 ```
  A `Cite2Urn` always has five top-level components. It is legal for the object component to be empty.
 
-```jldoctest urn
+```@example urn
 pagecollection =  Cite2Urn("urn:cite2:hmt:msA.v1:")
 components(pagecollection)
-
-# output
-
-5-element Vector{SubString{String}}:
- "urn"
- "cite2"
- "hmt"
- "msA.v1"
- ""
 ```
 
 You can use the following functions to extract top-level components by name.  They return a string value.
 
-```jldoctest urn
+```@example urn
 namespace(pageurn)
-
-# output
-
-"hmt"
 ```
 
 
-```jldoctest urn
+```@example urn
 collectioncomponent(pageurn)
-
-# output
-
-"msA.v1"
 ```
 
-```jldoctest urn
+```@example urn
 objectcomponent(pageurn)
-
-# output
-
-"12r"
 ```
 
 You can also retrieve individual parts of the collection component:
 
 
 
-```jldoctest urn
+```@example urn
 collectionid(pageurn)
-
-# output
-
-"msA"
 ```
 
-```jldoctest urn
+```@example urn
 versionid(pageurn)
-
-# output
-
-"v1"
 ```
 
-```jldoctest urn
+```@example urn
 propurn =  Cite2Urn("urn:cite2:hmt:msA.v1.side:12r")
 propertyid(propurn)
-
-# output
-
-"side"
 ```
 
 
@@ -108,129 +62,77 @@ propertyid(propurn)
 Several functions use a `Cite2Urn` to create a new, modified `Cite2Urn`.
 
 
-```jldoctest urn
+```@example urn
 dropversion(pageurn)
-
-# output
-
-urn:cite2:hmt:msA:12r
 ```
 
 Verify that the result is a new `Cite2Urn`.
 
-```jldoctest urn
+```@example urn
 dropversion(pageurn) |> typeof
-
-# output
-
-Cite2Urn
 ```
 
 
 
-```jldoctest urn
+```@example urn
 addversion(pageurn, "v2")
-
-# output
-
-urn:cite2:hmt:msA.v2:12r
 ```
 
 
 
-```jldoctest urn
+```@example urn
 dropobject(pageurn)
-
-# output
-
-urn:cite2:hmt:msA.v1:
 ```
 
-```jldoctest urn
+```@example urn
 addobject(pageurn, "1r")
-
-# output
-
-urn:cite2:hmt:msA.v1:1r
 ```
 
 
-```jldoctest urn
+```@example urn
 dropproperty(propurn)
-
-# output
-
-urn:cite2:hmt:msA.v1:12r
 ```
 
 
-```jldoctest urn
+```@example urn
 addproperty(pageurn, "side")
-
-# output
-
-urn:cite2:hmt:msA.v1.side:12r
 ```
 
 ## URN comparison
 
 In addition to comparing for equality with `==`, you can compare a pair of CITE2 URNs for URN containment or URN similarity.
 
-```jldoctest urn
+```@example urn
 urncontains(pagecollection, pageurn)
-
-# output
-
-true
 ```
 
 Two URNs are similar if they are equal, or if either contains the other.
 
-```jldoctest urn
+```@example urn
 urnsimilar(pagecollection, pageurn)
-
-# output
-
-true
 ```
 
 Note that this definition means the function is symmetric.
 
-```jldoctest urn
+```@example urn
 urnsimilar(pagecollection, pageurn) == urnsimilar(pageurn, pagecollection)
-
-# output
-
-true
 ```
 
 
 For `Cite2Urn`s, `urnequals` and `==` return identical results.
 
-```jldoctest urn
+```@example urn
 urnequals(pagecollection, pageurn)
-
-# output
-
-false
 ```
 
 
-```jldoctest urn
+```@example urn
 pagecollection == pageurn
-
-# output
-
-false
 ```
 
 
-```jldoctest urn
+```@example urn
 urnsimilar(pagecollection,dropobject(pageurn))
-
-# output
-
-true
 ```
 
 ## Ranges
@@ -238,31 +140,19 @@ true
 `Cite2Urn`s can identify *ranges* (sequences) of objects in ordered collections.
 
 
-```jldoctest urn
+```@example urn
 pages = Cite2Urn("urn:cite2:hmt:msA.v1:1r-11v")
 isrange(pages)
-
-# output
-
-true
 ```
 
 
-```jldoctest urn
+```@example urn
 rangebegin(pages)
-
-# output
-
-"1r"
 ```
 
 
-```jldoctest urn
+```@example urn
 rangeend(pages)
-
-# output
-
-"11v"
 ```
 
 
@@ -271,32 +161,20 @@ rangeend(pages)
 In some collections, extended identifiers ("subreferences") may be appropriate.  You can determine if a `Cite2Urn` includes an extended identifier, extract the subreference, or drop it.
 
 
-```jldoctest urn
+```@example urn
 imgurn = Cite2Urn("urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2005,0.2073,0.1774,0.02351")
 hassubref(imgurn)
-
-# output
-
-true
 ```
 
 The `subref` functions returns a string value.
 
-```jldoctest urn
+```@example urn
 subref(imgurn)
-
-# output
-
-"0.2005,0.2073,0.1774,0.02351"
 ```
 
 The `dropsubref` function returns a new `Cite2Urn`.
 
 
-```jldoctest urn
+```@example urn
 dropsubref(imgurn)
-
-# output
-
-urn:cite2:hmt:vaimg.2017a:VA012RN_0013
 ```

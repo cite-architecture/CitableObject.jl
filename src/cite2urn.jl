@@ -16,8 +16,6 @@ end
 """A value of `CitableBase.CitableTrait` that can be used for content citable by `CtsUrn`.
 """
 struct CitableByCite2Urn <: CitableTrait end
-UrnComparisonTrait(Cite2Urn)  = UrnComparable()
-
 
 """Override `Base.show` for `Cite2Urn`.
 
@@ -28,10 +26,7 @@ function show(io::IO, urn::Cite2Urn)
 end
 
 
-"""Override `Base.print` for `Cite2Urn`.
 
-$(SIGNATURES)
-"""
-function print(io::IO, urn::Cite2Urn)
-    print(io,urn.urn)
+function urncomparisontrait(Cite2Urn)
+    Cite2UrnComparable()
 end

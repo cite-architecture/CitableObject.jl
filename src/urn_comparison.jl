@@ -1,4 +1,13 @@
+"Value for URN comparison trait on `CtsUrn`DocStringExtensions"
+struct Cite2UrnComparable <: UrnComparisonTrait end
 
+
+"""`CtsUrn`s are URN comparable.
+$(SIGNATURES)
+"""
+function urncomparisontrait(::Type{Cite2Urn}) 
+    Cite2UrnComparable()
+end
 
 
 """
@@ -7,7 +16,7 @@ True if  `urn1` contains or is equal to `urn2` accroding to URN logic.
 
 ```
 """
-function urncontains(u1, u2)
+function urncontains(u1::Cite2Urn, u2::Cite2Urn)
     objidmatch = isnothing(objectcomponent(u1)) || objectcomponent(u1) == objectcomponent(u2)
     objidmatch && collectioncontains(u1, u2)
 end
@@ -19,7 +28,7 @@ True if collection component of `urn1` contains or is equal to collection compon
 
 ```
 """
-function collectioncontains(u1, u2)
+function collectioncontains(u1::Cite2Urn, u2::Cite2Urn)
     if  length(collectionparts(u1)) < length(collectionparts(u2))
         true
     else
