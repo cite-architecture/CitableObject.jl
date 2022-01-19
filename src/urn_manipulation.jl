@@ -10,7 +10,8 @@ $(SIGNATURES)
 function dropversion(u::Cite2Urn)::Cite2Urn
     save = components(u.urn)[1:3]
     push!(save, collectionid(u))
-    push!(save, objectcomponent(u))
+    objpart = objectcomponent(u)
+    isnothing(objpart) ? push!(save, "") : push!(save, objpart)
     join(save, ":") |> Cite2Urn
 
 end
@@ -25,7 +26,8 @@ function addversion(u::Cite2Urn, versid::AbstractString)::Cite2Urn
     save = components(u.urn)[1:3]
     newversion = string(collectionid(u), ".", versid)
     push!(save, newversion)
-    push!(save, objectcomponent(u))
+    objpart = objectcomponent(u)
+    isnothing(objpart) ? push!(save, "") : push!(save, objpart)
     join(save, ":") |> Cite2Urn
 end
 
