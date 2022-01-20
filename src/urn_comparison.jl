@@ -29,11 +29,7 @@ True if collection component of `urn1` contains or is equal to collection compon
 ```
 """
 function collectioncontains(u1::Cite2Urn, u2::Cite2Urn)
-    if  length(collectionparts(u1)) < length(collectionparts(u2))
-        true
-    else
-        collectionparts(u1)[1:length(collectionparts(u2))] == collectionparts(u2)
-    end
+    intersect(collectionparts(u1), collectionparts(u2)) == collectionparts(u1)
 end
 
 
