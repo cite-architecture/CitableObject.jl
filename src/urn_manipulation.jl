@@ -43,8 +43,11 @@ function addproperty(u::Cite2Urn, propid::AbstractString)::Cite2Urn
     push!(save, newversion)
     if ! isnothing(objectcomponent(u))
         push!(save, objectcomponent(u))
+        join(save, ":") |> Cite2Urn
+    else
+        join(save, ":") * ":" |> Cite2Urn
     end
-    join(save, ":") |> Cite2Urn
+    
 end
 
 """
