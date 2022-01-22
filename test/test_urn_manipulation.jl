@@ -7,6 +7,7 @@
 
     @test addproperty(urn, "side") ==  Cite2Urn("urn:cite2:hmt:msA.v1.side:12r")
     @test dropproperty(urn) == urn
+    @test dropobject(urn) |> dropproperty == Cite2Urn("urn:cite2:hmt:msA.v1:")
 
     pages = Cite2Urn("urn:cite2:hmt:msA.v1:")
     @test urncontains(pages,urn)

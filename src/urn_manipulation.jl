@@ -41,7 +41,9 @@ function addproperty(u::Cite2Urn, propid::AbstractString)::Cite2Urn
     save = components(u.urn)[1:3]
     newversion = string(collectionid(u), ".", versionid(u), ".", propid)
     push!(save, newversion)
-    push!(save, objectcomponent(u))
+    if ! isnothing(objectcomponent(u))
+        push!(save, objectcomponent(u))
+    end
     join(save, ":") |> Cite2Urn
 end
 
