@@ -15,7 +15,6 @@ import CitableBase: urncontains
 import CitableBase: urnsimilar
 
 import CitableBase: supportssubref
-import CitableBase: addsubref
 import CitableBase: dropsubref
 import CitableBase: hassubref
 import CitableBase: subref
