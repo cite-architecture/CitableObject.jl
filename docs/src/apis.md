@@ -22,11 +22,14 @@ objectcomponent
 isrange
 rangebegin
 rangeend
+supportssubref
 hassubref
 subref
 dropsubref
+supportsversion
 dropversion
 addversion
+versionid
 dropproperty
 addproperty
 ```

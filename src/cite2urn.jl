@@ -26,7 +26,25 @@ function show(io::IO, urn::Cite2Urn)
 end
 
 
-
+"""Define `UrnComparisonTrait` for `Cite2Urn`.
+$(SIGNATURES)
+"""
 function urncomparisontrait(Cite2Urn)
     Cite2UrnComparable()
+end
+
+
+"""`Cite2Urn`s support version ids.
+$(SIGNATURES)
+"""
+function supportsversion(u::Cite2Urn)
+    true
+end
+
+
+"""`Cite2Urn`s support subreferences.
+$(SIGNATURES)
+"""
+function supportssubref(u::Cite2Urn)
+    true
 end
