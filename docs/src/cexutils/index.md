@@ -19,7 +19,7 @@ The following examples are illustrated using the `hmt-2022i.cex` published relea
 ```@example cexutils 
 f = joinpath(root, "test", "data", "hmt-2022i.cex")
 s = read(f) |> String
-u = "https://raw.githubusercontent.com/cite-architecture/CitableObject. jl/main/test/data/hmt-2022i.cex" 
+u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022i.cex" 
 using CiteEXchange
 blks = blocks(s) 
 # Length in characters:
@@ -42,7 +42,6 @@ msbimgs = Cite2Urn("urn:cite2:hmt:msB.v1:")
 sprops = properties(s, msbimgs)
 ```
 
-
 We get the same result if we read a Vector of `Block`s.
 
 ```@example cexutils
@@ -50,10 +49,30 @@ bprops = properties(blks, msbimgs)
 sprops == bprops
 ```
 
-###
+We can also read from files or URL sources.
 
 
-3. collect collection urns for datamodel:
-4. collect relation blocks for urn
-5.  collect data blocks for urn
-1. collect properties for urn
+```@example cexutils
+using CitableBase: FileReader
+using CitableBase: UrlReader
+fprops = properties(f, msbimgs, FileReader)
+uprops == properties(u, msbimgs, UrlReader)
+frpops == uprops == sprops
+```
+
+
+### Find data lines of a citable collection
+
+```@example cexutils
+sdata = collectiondata(s, msbimgs)
+length(sdata)
+```
+
+
+### collect collection urns for datamodel
+
+### collect collection data for datamodel
+
+###  collect relation blocks for urn
+
+
