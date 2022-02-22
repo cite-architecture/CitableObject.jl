@@ -42,3 +42,11 @@ urnequals
 urnsimilar
 ```
 
+## `CexUtils` submodule
+
+```@docs
+CitableObject.CexUtils.properties
+CitableObject.CexUtils.collectiondata
+CitableObject.CexUtils.relations
+CitableObject.CexUtils.collections_for_model
+```

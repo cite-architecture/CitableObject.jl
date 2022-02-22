@@ -43,6 +43,8 @@ include("urn_comparison.jl")
 
 module CexUtils
     import ..CitableObject
+    using Documenter, DocStringExtensions
+    
     using CitableBase
     using CiteEXchange
     include("cexutils.jl")
