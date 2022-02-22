@@ -35,7 +35,7 @@ end
 """Find all data lines in the CEX string `s` contained by `u`.
 $(SIGNATURES)
 """
-function collectionblocks(s::AbstractString, u::Cite2Urn; delimiter = "|")
+function collectiondata(s::AbstractString, u::Cite2Urn; delimiter = "|")
     # Parse by block since column position of URN is not guaranteed.
     ustring = string(u)
     matchingblocks = []
@@ -47,24 +47,17 @@ function collectionblocks(s::AbstractString, u::Cite2Urn; delimiter = "|")
     matchingblocks |> Iterators.flatten |> collect
 end
 
-#=
 
-"""Find all property definitions in the CEX string `s` contained by `u`.
-$(SIGNATURES)
-"""
-function properties(s::AbstractString, u::Cite2Urn)
-    propdata = data(s, "citeproperties")
-    matchingproperties(propdata,u)
-end
+
 
 """Find all property definitions in `blks` contained by `u`.
 $(SIGNATURES)
 """
-function properties(blks::Vector{Block}, u::Cite2Urn)
+function collectiondata(blks::Vector{Block}, u::Cite2Urn; delimiter = "|")
     propdata = data(blks, "citeproperties")
     matchingproperties(propdata,u)
 end
-
+#=
 """Dispatch `properties` on `T`.
 
 $(SIGNATURES)

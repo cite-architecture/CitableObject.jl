@@ -56,11 +56,14 @@ module CexUtils
     include("cexutils/properties.jl")
     include("cexutils/collections.jl")
     include("cexutils/models.jl")
+    include("cexutils/modelsdata.jl")
     include("cexutils/relations.jl")
 
     export properties
-    export collectionblocks
-    export relations
+    export collectiondata
     export collections_for_model
+    export data_for_model
+    export relations
+    
 end # submodule
 end # module 

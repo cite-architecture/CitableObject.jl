@@ -24,4 +24,8 @@ end
     s = read(f) |> String
     u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022i.cex" 
     msbimg = Cite2Urn("urn:cite2:hmt:msB.v1:")
+
+    expectedlength = 683
+    @test collectiondata(s, msbimg) |> length == expectedlength
+
 end
