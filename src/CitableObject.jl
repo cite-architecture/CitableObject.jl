@@ -44,8 +44,12 @@ include("urn_comparison.jl")
 module CexUtils
     import ..CitableObject
     using Documenter, DocStringExtensions
-    
-    using CitableBase
+
+    using CitableBase: urncontains
+    using CitableBase: ReaderType
+    using CitableBase: FileReader
+    using CitableBase: StringReader
+    using CitableBase: UrlReader
     using CiteEXchange
     include("cexutils.jl")
 

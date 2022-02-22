@@ -22,6 +22,9 @@ makedocs(
             "The Cite2Urn" => "guide.md",
             "The CitableByCite2Urn trait" => "trait.md"
         ],
+        "The CexUtils module" => Any[
+            "CEX utilities" => "cexutils/index.md"
+        ],
         "API documentation" => "apis.md"
     ]
     )
