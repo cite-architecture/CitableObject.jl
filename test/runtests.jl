@@ -1,8 +1,10 @@
 using CitableObject
 using CitableObject.CexUtils
+using CiteEXchange
 using CitableBase
 import CitableBase: CitableTrait
 import CitableBase: urn
+
 using Test
 
 

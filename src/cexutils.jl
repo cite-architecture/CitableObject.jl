@@ -1,4 +1,5 @@
 using CitableObject
+using CiteEXchange
 
 #=
 1. collect properties for urn
@@ -8,22 +9,35 @@ using CitableObject
 =#
 
 
-"""Find all property definitions in the CEX string `s` contained by `u`.
-$(SIGNATURES)
-"""
-function properties(s::AbstractString, u::Cite2Urn; delimiter = "|")
-    "Get properties"
-    propdata = data(s, "citeproperties")
+function matchingproperties(lines::Vector{<: AbstractString}, u::Cite2Urn, delimiter::AbstractString)
     matchinglines = []
-    for prop in propdata
+    for prop in lines
         columns = split(prop, delimiter)
         if urncontains(u, Cite2Urn(columns[1]))
             push!(matchinglines, prop)
         end
     end
-    #  "Property|Label|Type|Authority list"
     matchinglines
 end
+
+"""Find all property definitions in the CEX string `s` contained by `u`.
+$(SIGNATURES)
+"""
+function properties(s::AbstractString, u::Cite2Urn; delimiter = "|")
+    propdata = data(s, "citeproperties")
+    matchingproperties(propdata,u,delimiter)
+end
+
+"""Find all property definitions in `blks` contained by `u`.
+$(SIGNATURES)
+"""
+function properties(blks::Vector{Block}, u::Cite2Urn; delimiter = "|")
+    propdata = data(blks, "citeproperties")
+    matchingproperties(propdata,u,delimiter)
+end
+
+
+
 
 
 function collections_for_model(s::AbstractString, u::Cite2Urn)
