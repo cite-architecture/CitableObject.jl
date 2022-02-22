@@ -46,5 +46,9 @@ end
     Cite2Urn("urn:cite2:hmt:iliadindex.v1:msB")
     ]
     @test collectionurns_for_model(s, dm) == expected
+    @test collectionurns_for_model(blocks(s), dm) == expected
+    @test collectionurns_for_model(s, dm, StringReader) == expected
+    @test collectionurns_for_model(f, dm, FileReader) == expected
+    @test collectionurns_for_model(u, dm, UrlReader) == expected
 end
     

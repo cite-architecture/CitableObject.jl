@@ -10,7 +10,7 @@ using CiteEXchange
 function collectionurns_for_model(s::AbstractString, u::Cite2Urn; delimiter = "|")
     collectionurns_for_model(blocks(s, "datamodels"), u, delimiter = "|")
 end
-#Collection|Model|Label|Description
+
 
 
 
@@ -20,8 +20,12 @@ $(SIGNATURES)
 function collectionurns_for_model(blks::Vector{Block}, datamodel::Cite2Urn; delimiter = "|")
     ustring = string(datamodel)
     collectionlist = []
+    
     for dmentry in data(blks, "datamodels")
+
         cols = split(dmentry, delimiter)
+        # Format is:
+        #Collection|Model|Label|Description
         if cols[2] == ustring
             push!(collectionlist, Cite2Urn(cols[1]))
         end
@@ -29,39 +33,40 @@ function collectionurns_for_model(blks::Vector{Block}, datamodel::Cite2Urn; deli
     collectionlist
 end
 
-#=
-"""Find all data lines in the CEX string `s` contained by `u`.
-$(SIGNATURES)
-"""
-function collectiondata(s::AbstractString, u::Cite2Urn; delimiter = "|")
-    collectiondata(blocks(s, "citedata"), u, delimiter = delimiter)
-end
-
-
-"""Dispatch `collectiondata` on `T`.
+"""Dispatch `collectionurns_for_model` on `T`.
 
 $(SIGNATURES)
 """    
-function collectiondata(cexsrc::AbstractString, u::Cite2Urn, reader::T; delimiter = "|") where {T <: ReaderType}
-    collectiondata(cexsrc, u, T, delimiter = delimiter)
+function collectionurns_for_model(cexsrc::AbstractString, datamodel::Cite2Urn, reader::T; delimiter = "|") where {T <: ReaderType}
+    collectionurns_for_model(cexsrc, datamodel, T, delimiter = delimiter)
 end
 
-"""Find all data lines in CEX file `filesrc` contained by `u`.
+"""Find  `Cite2Urn`s for all collections in CEX file `filesrc` implementing `datamodel`.
 $(SIGNATURES)
 """
-function collectiondata(filesrc::AbstractString, u::Cite2Urn, freader::Type{FileReader}; delimiter = "|")
-    s = read(filesrc) |> String
-    collectiondata(s, u, delimiter = delimiter)
+function collectionurns_for_model(filesrc::AbstractString, datamodel::Cite2Urn, freader::Type{FileReader}; delimiter = "|")
+    blks = read(filesrc) |> String |> blocks
+    collectionurns_for_model(blks, datamodel, delimiter = delimiter)
 end
 
 
-"""Find all data lines in CEX at URL `url` contained by `u`.
+"""Find  `Cite2Urn`s for all collections in CEX file `filesrc` implementing `datamodel`.
 $(SIGNATURES)
 """
-function collectiondata(url::AbstractString, u::Cite2Urn, ureader::Type{UrlReader}; delimiter = "|")
-    s = Downloads.download(url) |> read |> String
-    collectiondata(s, u, delimiter = delimiter)
+function collectionurns_for_model(url::AbstractString, datamodel::Cite2Urn, freader::Type{UrlReader}; delimiter = "|")
+    blks =  s = Downloads.download(url) |> read |> String |> blocks
+    collectionurns_for_model(blks, datamodel, delimiter = delimiter)
 end
+
+"""Find  `Cite2Urn`s for all collections in CEX file `filesrc` implementing `datamodel`.
+$(SIGNATURES)
+"""
+function collectionurns_for_model(s::AbstractString, datamodel::Cite2Urn, freader::Type{StringReader}; delimiter = "|")
+    collectionurns_for_model(s, datamodel, delimiter = delimiter)
+end
+
+#=
+
 
 """Find all property definitions in CEX at URL `url` contained by `u`.
 $(SIGNATURES)
