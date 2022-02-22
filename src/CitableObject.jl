@@ -61,7 +61,7 @@ module CexUtils
 
     export properties
     export collectiondata
-    export collections_for_model
+    export collectionurns_for_model
     export data_for_model
     export relations
     

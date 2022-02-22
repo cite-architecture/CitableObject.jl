@@ -1,13 +1,6 @@
 using CitableObject
 using CiteEXchange
 
-#=
-1. √ collect properties for urn
-5.  collect data blocks for urn
-3. collect collection urns for datamodel:
-4. collect relation blocks for urn
-=#
-
 """From a list of string values, extract those where the first delimited column
 matches `u` by URN containment.
 $(SIGNATURES)

@@ -2,8 +2,8 @@ using CitableObject
 using CiteEXchange
 
 #=
-1. √ collect properties for urn
-5.  collect data blocks for urn
+1. √ collect properties for collection
+5. √ collect data for collection
 3. collect collection urns for datamodel:
 4. collect relation blocks for urn
 =#
