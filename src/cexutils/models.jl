@@ -1,18 +1,12 @@
 using CitableObject
 using CiteEXchange
 
-
-
-
-
-
-"""DOCUMENT ME"""
-function collectionurns_for_model(s::AbstractString, u::Cite2Urn; delimiter = "|")
-    collectionurns_for_model(blocks(s, "datamodels"), u, delimiter = "|")
+"""Find `Cite2Urn`s for all collections in `s` implementing `datamodel`.
+$(SIGNATURES)
+"""
+function collectionurns_for_model(s::AbstractString, datamodel::Cite2Urn; delimiter = "|")
+    collectionurns_for_model(blocks(s, "datamodels"), datamodel, delimiter = "|")
 end
-
-
-
 
 """Find `Cite2Urn`s for all collections in `blks` implementing `datamodel`.
 $(SIGNATURES)
@@ -54,7 +48,7 @@ end
 $(SIGNATURES)
 """
 function collectionurns_for_model(url::AbstractString, datamodel::Cite2Urn, freader::Type{UrlReader}; delimiter = "|")
-    blks =  s = Downloads.download(url) |> read |> String |> blocks
+    blks = Downloads.download(url) |> read |> String |> blocks
     collectionurns_for_model(blks, datamodel, delimiter = delimiter)
 end
 
@@ -64,15 +58,3 @@ $(SIGNATURES)
 function collectionurns_for_model(s::AbstractString, datamodel::Cite2Urn, freader::Type{StringReader}; delimiter = "|")
     collectionurns_for_model(s, datamodel, delimiter = delimiter)
 end
-
-#=
-
-
-"""Find all property definitions in CEX at URL `url` contained by `u`.
-$(SIGNATURES)
-"""
-function collectiondata(s::AbstractString, u::Cite2Urn, sreader::Type{StringReader}; delimiter = "|")
-    collectiondata(s, u, delimiter = delimiter)
-end
-
-=#

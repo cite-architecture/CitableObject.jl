@@ -13,13 +13,13 @@ The utility functions documented here are designed to work identically with mult
 
 ### Data used in these examples
 
-The following examples are illustrated using the `hmt-2022i.cex` published release of the Homer Multitext project, a complex CEX source with roughly 18 Mb of plain-text data.  A copy of that file is in the `test/data` directory of this repository. 
+The following examples are illustrated using the `hmt-2022j.cex` published release of the Homer Multitext project, a complex CEX source with roughly 18 Mb of plain-text data.  A copy of that file is in the `test/data` directory of this repository. 
 
 
 ```@example cexutils 
-f = joinpath(root, "test", "data", "hmt-2022i.cex")
+f = joinpath(root, "test", "data", "hmt-2022j.cex")
 s = read(f) |> String
-u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022i.cex" 
+u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022j.cex" 
 using CiteEXchange
 blks = blocks(s) 
 # Length in characters:
@@ -85,9 +85,31 @@ length(sdata) == length(bdata) == length(fdata) == length(udata)
 ```
 
 
-### collect collection urns for datamodel
+### Find collections implementing a datamodel
 
-### collect collection data for datamodel
+The CEX format defines a `datamodels` block where you can tie the content of a CITE collection to a data model identified by a URN value.   The Homer Multitext project defines a data model for representing citable text on a manuscript page.
+
+```@example cexutils
+model = Cite2Urn("urn:cite2:hmt:datamodels.v1:textonpage")
+```
+
+We can find `Cite2Urn`s for all collections implementing this model.
+
+```@example cexutils
+collectionurns_for_model(s, model)
+```
+
+The results are the same no matter what kind of source we read from.
+
+```@example cexutils
+bmodelurns = collectionurns_for_model(blks, msbimgs)
+fmodelurns = collectionurns_for_model(f, msbimgs, FileReader)
+umodelurns = collectionurns_for_model(u, msbimgs, UrlReader)
+
+bmodelurns == fmodelurns == umodelurns
+```
+
+### Find collection data for a datamodel
 
 ###  collect relation blocks for urn
 
