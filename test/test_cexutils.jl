@@ -33,3 +33,18 @@ end
     @test collectiondata(u, msbimg, UrlReader) |> length == expectedlength
 
 end
+
+
+@testset "Test finding collections for data model in CEX" begin
+    f = joinpath(pwd(), "data", "hmt-2022i.cex")
+    s = read(f) |> String
+    u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022i.cex"
+    dm = Cite2Urn("urn:cite2:hmt:datamodels.v1:textonpage")
+    expected = [
+    Cite2Urn("urn:cite2:hmt:iliadindex.v1:e4"),
+    Cite2Urn("urn:cite2:hmt:iliadindex.v1:u4"),
+    Cite2Urn("urn:cite2:hmt:iliadindex.v1:msB")
+    ]
+    @test collectionurns_for_model(s, dm) == expected
+end
+    

@@ -48,5 +48,5 @@ urnsimilar
 CitableObject.CexUtils.properties
 CitableObject.CexUtils.collectiondata
 CitableObject.CexUtils.relations
-CitableObject.CexUtils.collections_for_model
+CitableObject.CexUtils.collectionurns_for_model
 ```
