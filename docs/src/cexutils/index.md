@@ -113,4 +113,6 @@ bmodelurns == fmodelurns == umodelurns
 
 ###  collect relation blocks for urn
 
+###  collect relation blocks for a datamodel
+
 
