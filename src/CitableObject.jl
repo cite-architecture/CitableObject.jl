@@ -54,9 +54,12 @@ module CexUtils
     using CiteEXchange
 
     include("cexutils/properties.jl")
+    include("cexutils/collections.jl")
+    include("cexutils/models.jl")
+    include("cexutils/relations.jl")
 
     export properties
-    export collectiondata
+    export collectionblocks
     export relations
     export collections_for_model
 end # submodule
