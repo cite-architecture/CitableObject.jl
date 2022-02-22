@@ -31,15 +31,13 @@ function urnpeek(datablock::Block; delimiter = "|")
     cols[urnindex]
 end
 
-
-"""Find all data lines in the CEX string `s` contained by `u`.
+"""Find all data lines in `blks`` contained by `u`.
 $(SIGNATURES)
 """
-function collectiondata(s::AbstractString, u::Cite2Urn; delimiter = "|")
-    # Parse by block since column position of URN is not guaranteed.
+function collectiondata(blks::Vector{Block}, u::Cite2Urn; delimiter = "|")
     ustring = string(u)
     matchingblocks = []
-    for b in  blocks(s, "citedata")
+    for b in blks
         if startswith(urnpeek(b, delimiter = delimiter), ustring)
             push!(matchingblocks, b.lines[2:end])
         end
@@ -47,49 +45,42 @@ function collectiondata(s::AbstractString, u::Cite2Urn; delimiter = "|")
     matchingblocks |> Iterators.flatten |> collect
 end
 
-
-
-
-"""Find all property definitions in `blks` contained by `u`.
+"""Find all data lines in the CEX string `s` contained by `u`.
 $(SIGNATURES)
 """
-function collectiondata(blks::Vector{Block}, u::Cite2Urn; delimiter = "|")
-    propdata = data(blks, "citeproperties")
-    matchingproperties(propdata,u)
+function collectiondata(s::AbstractString, u::Cite2Urn; delimiter = "|")
+    collectiondata(blocks(s, "citedata"), u, delimiter = delimiter)
 end
-#=
-"""Dispatch `properties` on `T`.
+
+
+"""Dispatch `collectiondata` on `T`.
 
 $(SIGNATURES)
 """    
-function properties(cexsrc::AbstractString, u::Cite2Urn, reader::T) where {T <: ReaderType}
-    properties(cexsrc, u, T)
+function collectiondata(cexsrc::AbstractString, u::Cite2Urn, reader::T; delimiter = "|") where {T <: ReaderType}
+    collectiondata(cexsrc, u, T, delimiter = delimiter)
 end
 
-"""Find all property definitions in CEX file `filesrc` contained by `u`.
+"""Find all data lines in CEX file `filesrc` contained by `u`.
 $(SIGNATURES)
 """
-function properties(filesrc::AbstractString, u::Cite2Urn, freader::Type{FileReader})
+function collectiondata(filesrc::AbstractString, u::Cite2Urn, freader::Type{FileReader}; delimiter = "|")
     s = read(filesrc) |> String
-    properties(s, u)
+    collectiondata(s, u, delimiter = delimiter)
 end
 
 
-"""Find all property definitions in CEX at URL `url` contained by `u`.
+"""Find all data lines in CEX at URL `url` contained by `u`.
 $(SIGNATURES)
 """
-function properties(url::AbstractString, u::Cite2Urn, ureader::Type{UrlReader})
+function collectiondata(url::AbstractString, u::Cite2Urn, ureader::Type{UrlReader}; delimiter = "|")
     s = Downloads.download(url) |> read |> String
-    properties(s, u)
+    collectiondata(s, u, delimiter = delimiter)
 end
 
 """Find all property definitions in CEX at URL `url` contained by `u`.
 $(SIGNATURES)
 """
-function properties(s::AbstractString, u::Cite2Urn, sreader::Type{StringReader})
-    properties(s, u)
+function collectiondata(s::AbstractString, u::Cite2Urn, sreader::Type{StringReader})
+    collectiondata(s, u, delimiter = delimiter)
 end
-
-
-
-=#

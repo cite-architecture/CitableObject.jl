@@ -27,5 +27,9 @@ end
 
     expectedlength = 683
     @test collectiondata(s, msbimg) |> length == expectedlength
+    @test collectiondata(blocks(s, "citedata"), msbimg) |> length == expectedlength
+    @test collectiondata(s, msbimg, StringReader) |> length == expectedlength
+    @test collectiondata(f, msbimg, FileReader) |> length == expectedlength
+    @test collectiondata(u, msbimg, UrlReader) |> length == expectedlength
 
 end
