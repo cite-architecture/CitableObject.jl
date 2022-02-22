@@ -39,4 +39,17 @@ include("ranges.jl")
 include("subreferences.jl")
 include("urn_comparison.jl")
 
-end # module
+
+
+module CexUtils
+    import ..CitableObject
+    using CitableBase
+    using CiteEXchange
+    include("cexutils.jl")
+
+    export properties
+    export collectiondata
+    export relations
+    export collections_for_model
+end # submodule
+end # module 
