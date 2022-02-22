@@ -33,7 +33,7 @@ length(s)
 
 ### Find properties of a citable collection
 
-`urn:cite2:hmt:msB.v1:` identifies a collection of images of a particular manuscript.  Let's use the CEX string to find the properties of that collection.
+`urn:cite2:hmt:msB.v1:` identifies a collection of images of a particular manuscript.  Let's use the CEX string to find the properties of that collection (that is, the relevant content of all `citeproperties` blocks in the CEX source).
 
 ```@example cexutils
 using CitableObject
@@ -54,18 +54,34 @@ We can also read from files or URL sources.
 
 ```@example cexutils
 using CitableBase: FileReader
-using CitableBase: UrlReader
 fprops = properties(f, msbimgs, FileReader)
-uprops == properties(u, msbimgs, UrlReader)
-frpops == uprops == sprops
+
+using CitableBase: UrlReader
+uprops = properties(u, msbimgs, UrlReader)
+
+fprops == uprops == sprops
 ```
 
 
 ### Find data lines of a citable collection
 
+Now let's find the data for the same collection (that is, the relevant content of all `citedata` blocks in the CEX source).
+
+We can use a pure string of CEX data.
+
 ```@example cexutils
 sdata = collectiondata(s, msbimgs)
 length(sdata)
+```
+
+Or again, we can read from files, URLs, or lists of `Block`s.
+
+```@example cexutils
+bdata = collectiondata(blks, msbimgs)
+fdata = collectiondata(f, msbimgs, FileReader)
+udata = collectiondata(u, msbimgs, UrlReader)
+
+length(sdata) == length(bdata) == length(fdata) == length(udata)
 ```
 
 

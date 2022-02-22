@@ -26,7 +26,11 @@ end
 $(SIGNATURES)
 """
 function urnpeek(datablock::Block; delimiter = "|")
-    urnindex = columndict(datablock)["urn"]
+    dict = columndict(datablock)
+    if ! haskey(dict, "urn")
+        throw(DomainError("No URN column in ", datablock.lines[1]))
+    end
+    urnindex = dict["urn"]
     cols = split(datablock.lines[2], delimiter)
     cols[urnindex]
 end
@@ -37,7 +41,7 @@ $(SIGNATURES)
 function collectiondata(blks::Vector{Block}, u::Cite2Urn; delimiter = "|")
     ustring = string(u)
     matchingblocks = []
-    for b in blks
+    for b in blocks(blks, "citedata")
         if startswith(urnpeek(b, delimiter = delimiter), ustring)
             push!(matchingblocks, b.lines[2:end])
         end
