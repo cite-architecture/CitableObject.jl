@@ -1,6 +1,7 @@
-@testset "Test retrieving properties by URN" begin
+@testset "Test retrieving properties from CEX by Cite2Urn" begin
     f = joinpath(pwd(), "data", "hmt-2022i.cex")
     s = read(f) |> String
+    u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022i.cex" 
     msbimg = Cite2Urn("urn:cite2:hmt:msB.v1:")
 
     expected = [
@@ -12,5 +13,7 @@
     ]
     @test properties(s, msbimg) ==  expected
     @test properties(blocks(s), msbimg) == expected
-    
+    @test properties(f, msbimg, FileReader) == expected
+    @test properties(u, msbimg, UrlReader) == expected
+    @test properties(s, msbimg, StringReader) ==  expected 
 end
