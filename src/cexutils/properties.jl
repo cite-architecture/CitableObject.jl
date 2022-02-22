@@ -39,22 +39,34 @@ function properties(blks::Vector{Block}, u::Cite2Urn; delimiter = "|")
     matchingproperties(propdata,u,delimiter)
 end
 
+"""Dispatch `properties` on `T`.
 
+$(SIGNATURES)
+"""    
+function properties(cexsrc::AbstractString, u::Cite2Urn, reader::T; delimiter = "|") where {T <: ReaderType}
+    properties(cexsrc, u, T, delimiter = delimiter)
+end
 
-
-"""DOCUMENT ME"""
-function collections_for_model(s::AbstractString, u::Cite2Urn)
-    "Get URNs of collections for data model `u`"
+"""Find all property definitions in CEX file `filesrc` contained by `u`.
+$(SIGNATURES)
+"""
+function properties(filesrc::AbstractString, u::Cite2Urn, freader::Type{FileReader}; delimiter = "|")
+    s = read(filesrc) |> String
+    properties(s, u, delimiter = delimiter)
 end
 
 
-"""DOCUMENT ME"""
-function relations(s::AbstractString, u::Cite2Urn)
-    "Get relations"
+"""Find all property definitions in CEX at URL `url` contained by `u`.
+$(SIGNATURES)
+"""
+function properties(url::AbstractString, u::Cite2Urn, ureader::Type{UrlReader}; delimiter = "|")
+    s = Downloads.download(url) |> read |> String
+    properties(s, u, delimiter = delimiter)
 end
 
-
-"""DOCUMENT ME"""
-function collectiondata(s::AbstractString, u::Cite2Urn)
+"""Find all property definitions in CEX at URL `url` contained by `u`.
+$(SIGNATURES)
+"""
+function properties(s::AbstractString, u::Cite2Urn, sreader::Type{StringReader}; delimiter = "|")
+    properties(s, u, delimiter = delimiter)
 end
-

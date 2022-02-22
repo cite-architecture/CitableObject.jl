@@ -44,6 +44,7 @@ include("urn_comparison.jl")
 module CexUtils
     import ..CitableObject
     using Documenter, DocStringExtensions
+    using Downloads
 
     using CitableBase: urncontains
     using CitableBase: ReaderType
@@ -51,7 +52,8 @@ module CexUtils
     using CitableBase: StringReader
     using CitableBase: UrlReader
     using CiteEXchange
-    include("cexutils.jl")
+
+    include("cexutils/properties.jl")
 
     export properties
     export collectiondata
