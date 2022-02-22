@@ -56,5 +56,10 @@ end
     f = joinpath(pwd(), "data", "hmt-2022j.cex")
     s = read(f) |> String
     u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022j.cex"
-    dm = Cite2Urn("urn:cite2:hmt:datamodels.v1:textonpage")
+    dm = Cite2Urn("urn:cite2:hmt:datamodels.v1:codexmodel")
+
+    expected = 3866
+    @test data_for_model(s, dm) |> length == expected
+    @test data_for_model(blocks(s), dm) |> length == expected
+    @test data_for_model(f, dm, FileReader) |> length == expected
 end
