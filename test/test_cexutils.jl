@@ -70,7 +70,8 @@ end
     f = joinpath(pwd(), "data", "hmt-2022k.cex")
     s = read(f) |> String
     u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022k.cex"
-    #Find specific set object: 
+
+    #Find relations in a specific set object: 
     relobj = Cite2Urn("urn:cite2:hmt:iliadindex.v1:e4")
     expected_e4 = 15633
     s_rels = relations(s, relobj) |> length
@@ -83,13 +84,12 @@ end
     @test f_rels == expected_e4
     @test u_rels == expected_e4
 
-    #Find set collection: urn:cite2:hmt:iliadindex.v1:
+    #Find all sets in a collection
     expected_all = 38115
     s_rels_all = relations(s, dropobject(relobj)) |> length
     b_rels_all = relations(blocks(s), dropobject(relobj)) |> length
     f_rels_all = relations(f, dropobject(relobj), FileReader) |> length
     u_rels_all = relations(u, dropobject(relobj), UrlReader) |> length
-
 
     @test s_rels_all == expected_all
     @test b_rels_all == expected_all
@@ -97,4 +97,14 @@ end
     @test u_rels_all == expected_all
 
     #Find by data model: urn:cite2:hmt:datamodels.v1:textonpage:
+    dm = Cite2Urn("urn:cite2:hmt:datamodels.v1:textonpage")
+    s_model = relations_for_model(s, dm) |> length
+    b_model = relations_for_model(blocks(s), dm) |> length
+    f_model = relations_for_model(f, dm, FileReader) |> length
+    u_model = relations_for_model(u, dm, UrlReader) |> length
+
+    @test s_model === expected_all
+    @test b_model === expected_all
+    @test f_model === expected_all
+    @test u_model === expected_all
 end

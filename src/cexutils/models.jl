@@ -13,7 +13,7 @@ $(SIGNATURES)
 """
 function implementations(blks::Vector{Block}, datamodel::Cite2Urn; delimiter = "|")
     ustring = string(datamodel)
-    collectionlist = []
+    collectionlist = Cite2Urn[]
     
     for dmentry in data(blks, "datamodels")
 

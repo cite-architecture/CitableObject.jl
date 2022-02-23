@@ -3,64 +3,52 @@ using CiteEXchange
 
 
 
-"""Find relations data for all relation sets in `s` contained by `u`.
+"""Find relations data for all relation sets in `s` implementing data model `dm`.
 $(SIGNATURES)
 """
-function relations_for_model(s::AbstractString, u::Cite2Urn; delimiter = "|")
-    relations(blocks(s, "citerelationset"), u, delimiter = delimiter)
+function relations_for_model(s::AbstractString, dm::Cite2Urn)
+    relations_for_model(blocks(s), dm)
 end
 
-#=
-"""Find relations data for all relation sets in `blks` contained by `u`.
+"""Find relations data for all relation sets in `blks` implementing data model `dm`.
 $(SIGNATURES)
 """
-function relations(blks::Vector{Block}, u::Cite2Urn; delimiter = "|")
-    ustring = string(u)
-    relationdata = []
-    for b in blocks(blks, "citerelationset")
-        if relationsmatch(b, u)
-            push!(relationdata, b.lines[4:end])
-        end
+function relations_for_model(blks::Vector{Block}, dm::Cite2Urn)
+    results = []
+    for b in implementations(blks, dm)
+        push!(results, relations(blks, b))
     end
-    relationdata |> Iterators.flatten |> collect
+    results |> Iterators.flatten |> collect
 end
-
-
 
 
 """Dispatch `relations` on `T`.
 
 $(SIGNATURES)
 """    
-function relations(cexsrc::AbstractString, u::Cite2Urn, reader::T; delimiter = "|") where {T <: ReaderType}
-    relations(cexsrc, u, T, delimiter = delimiter)
+function relations_for_model(cexsrc::AbstractString, dm::Cite2Urn, reader::T) where {T <: ReaderType}
+    relations_for_model(cexsrc, dm, T)
 end
 
-"""Find relations data for all relation sets in CEX file `filesrc` contained by `u`.
+"""Find relations data for all relation sets in CEX file `filesrc` implementing data model `dm`.
 $(SIGNATURES)
 """
-function relations(filesrc::AbstractString, u::Cite2Urn, freader::Type{FileReader}; delimiter = "|")
+function relations_for_model(filesrc::AbstractString, dm::Cite2Urn, freader::Type{FileReader})
     blks = read(filesrc) |> String |> blocks
-    relations(blks, u, delimiter = delimiter)
+    relations_for_model(blks, dm)
 end
 
-
-"""Find relations data for all relation sets from CEX at URL `url` contained by `u`.
+"""Find relations data for all relation sets from CEX at URL `url` implementing data model `dm`.
 $(SIGNATURES)
 """
-function relations(url::AbstractString, u::Cite2Urn, freader::Type{UrlReader}; delimiter = "|")
+function relations_for_model(url::AbstractString, dm::Cite2Urn, freader::Type{UrlReader})
     blks =  s = Downloads.download(url) |> read |> String |> blocks
-    relations(blks, u, delimiter = delimiter)
+    relations_for_model(blks, dm)
 end
 
-
-
-
-"""Find relations data for all relation sets in `s` contained by `u`.
+"""Find relations data for all relation sets in `s` implementing data model `dm`.
 $(SIGNATURES)
 """
-function relations(s::AbstractString, u::Cite2Urn, freader::Type{StringReader}; delimiter = "|")
-    relations(s, u, delimiter = delimiter)
+function relations_for_model(s::AbstractString, dm::Cite2Urn, freader::Type{StringReader})
+    relations_for_model(s, dm)
 end
-
-=#
