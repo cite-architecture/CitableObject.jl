@@ -5,7 +5,7 @@ using CiteEXchange
 $(SIGNATURES)
 """
 function implementations(s::AbstractString, datamodel::Cite2Urn; delimiter = "|")
-    implementations(blocks(s, "datamodels"), datamodel, delimiter = "|")
+    implementations(blocks(s, "datamodels"), datamodel, delimiter = delimiter)
 end
 
 """Find `Cite2Urn`s for all collections in `blks` implementing `datamodel`.

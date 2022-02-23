@@ -10,76 +10,70 @@ passage|imageroi|surface
 urn:cts:greekLit:tlg0012.tlg001.e3:8.1|urn:cite2:hmt:e3bifolio.v1:E3_97bisv_98r@0.501,0.3063,0.224,0.043$
 
 =#
-"""DOCUMENT ME"""
-function relations(s::AbstractString, u::Cite2Urn)
+
+"""True if the relation set in `blk` is contained by `u`.
+$(SIGNATURES)
+"""
+function relationsmatch(blk::Block, u::Cite2Urn)
+    stringcheck = "urn|" * string(u)
+    startswith(blk.lines[1], stringcheck)
+end
+
+"""Find relations data for all relation sets in `s` contained by `u`.
+$(SIGNATURES)
+"""
+function relations(s::AbstractString, u::Cite2Urn; delimiter = "|")
+    relations(blocks(s, "citerelationset"), u, delimiter = delimiter)
+end
+
+"""Find relations data for all relation sets in `blks` contained by `u`.
+$(SIGNATURES)
+"""
+function relations(blks::Vector{Block}, u::Cite2Urn; delimiter = "|")
     ustring = string(u)
-    "Get relations"
-end
-
-
-
-
-#=
-
-"""Find `Cite2Urn`s for all collections in `s` implementing `datamodel`.
-$(SIGNATURES)
-"""
-function data_for_model(s::AbstractString, datamodel::Cite2Urn; delimiter = "|")
-    data_for_model(blocks(s, "datamodels"), u, delimiter = "|")
-end
-
-
-
-
-"""Find `Cite2Urn`s for all collections in `blks` implementing `datamodel`.
-$(SIGNATURES)
-"""
-function data_for_model(blks::Vector{Block}, datamodel::Cite2Urn; delimiter = "|")
-    ustring = string(datamodel)
-    collectionlist = []
-    
-    for dmentry in data(blks, "datamodels")
-
-        cols = split(dmentry, delimiter)
-        # Format is:
-        #Collection|Model|Label|Description
-        if cols[2] == ustring
-            push!(collectionlist, Cite2Urn(cols[1]))
+    relationdata = []
+    for b in blocks(blks, "citerelationset")
+        if relationsmatch(b, u)
+            push!(relationdata, b.lines[4:end])
         end
     end
-    collectionlist
+    relationdata |> Iterators.flatten |> collect
 end
 
-"""Dispatch `data_for_model` on `T`.
+
+
+
+"""Dispatch `relations` on `T`.
 
 $(SIGNATURES)
 """    
-function data_for_model(cexsrc::AbstractString, datamodel::Cite2Urn, reader::T; delimiter = "|") where {T <: ReaderType}
-    data_for_model(cexsrc, datamodel, T, delimiter = delimiter)
+function relations(cexsrc::AbstractString, u::Cite2Urn, reader::T; delimiter = "|") where {T <: ReaderType}
+    relations(cexsrc, u, T, delimiter = delimiter)
 end
 
-"""Find  `Cite2Urn`s for all collections in CEX file `filesrc` implementing `datamodel`.
+"""Find relations data for all relation sets in CEX file `filesrc` contained by `u`.
 $(SIGNATURES)
 """
-function data_for_model(filesrc::AbstractString, datamodel::Cite2Urn, freader::Type{FileReader}; delimiter = "|")
+function relations(filesrc::AbstractString, u::Cite2Urn, freader::Type{FileReader}; delimiter = "|")
     blks = read(filesrc) |> String |> blocks
-    data_for_model(blks, datamodel, delimiter = delimiter)
+    relations(blks, u, delimiter = delimiter)
 end
 
 
-"""Find  `Cite2Urn`s for all collections in CEX file `filesrc` implementing `datamodel`.
+"""Find relations data for all relation sets from CEX at URL `url` contained by `u`.
 $(SIGNATURES)
 """
-function data_for_model(url::AbstractString, datamodel::Cite2Urn, freader::Type{UrlReader}; delimiter = "|")
+function relations(url::AbstractString, u::Cite2Urn, freader::Type{UrlReader}; delimiter = "|")
     blks =  s = Downloads.download(url) |> read |> String |> blocks
-    data_for_model(blks, datamodel, delimiter = delimiter)
+    relations(blks, u, delimiter = delimiter)
 end
 
-"""Find  `Cite2Urn`s for all collections in CEX file `filesrc` implementing `datamodel`.
+
+
+
+"""Find relations data for all relation sets in `s` contained by `u`.
 $(SIGNATURES)
 """
-function data_for_model(s::AbstractString, datamodel::Cite2Urn, freader::Type{StringReader}; delimiter = "|")
-    data_for_model(s, datamodel, delimiter = delimiter)
+function relations(s::AbstractString, u::Cite2Urn, freader::Type{StringReader}; delimiter = "|")
+    relations(s, u, delimiter = delimiter)
 end
-
-=#
