@@ -6,7 +6,7 @@ using CiteEXchange
 $(SIGNATURES)
 """
 function data_for_model(s::AbstractString, datamodel::Cite2Urn; delimiter = "|")
-    urns = collectionurns_for_model(s, datamodel, delimiter = delimiter)
+    urns = implementations(s, datamodel, delimiter = delimiter)
     map(u -> collectiondata(s,u), urns) |> Iterators.flatten |> collect
 end
 
@@ -14,7 +14,7 @@ end
 $(SIGNATURES)
 """
 function data_for_model(blks::Vector{Block}, datamodel::Cite2Urn; delimiter = "|")
-    urns = collectionurns_for_model(blks, datamodel, delimiter = delimiter)
+    urns = implementations(blks, datamodel, delimiter = delimiter)
     map(u -> collectiondata(blks,u), urns) |> Iterators.flatten |> collect
 end
 

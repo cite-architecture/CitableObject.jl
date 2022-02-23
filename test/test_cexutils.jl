@@ -1,7 +1,7 @@
 @testset "Test retrieving properties from CEX by Cite2Urn" begin
-    f = joinpath(pwd(), "data", "hmt-2022j.cex")
+    f = joinpath(pwd(), "data", "hmt-2022k.cex")
     s = read(f) |> String
-    u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022j.cex" 
+    u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022k.cex" 
     msbimg = Cite2Urn("urn:cite2:hmt:msB.v1:")
 
     expected = [
@@ -20,9 +20,9 @@ end
 
 
 @testset "Test retrieving CITE data from CEX by Cite2Urn" begin
-    f = joinpath(pwd(), "data", "hmt-2022j.cex")
+    f = joinpath(pwd(), "data", "hmt-2022k.cex")
     s = read(f) |> String
-    u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022j.cex" 
+    u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022k.cex" 
     msbimg = Cite2Urn("urn:cite2:hmt:msB.v1:")
 
     expectedlength = 683
@@ -36,30 +36,75 @@ end
 
 
 @testset "Test finding collections for data model in CEX" begin
-    f = joinpath(pwd(), "data", "hmt-2022j.cex")
+    f = joinpath(pwd(), "data", "hmt-2022k.cex")
     s = read(f) |> String
-    u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022j.cex"
+    u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022k.cex"
     dm = Cite2Urn("urn:cite2:hmt:datamodels.v1:textonpage")
     expected = [
     Cite2Urn("urn:cite2:hmt:iliadindex.v1:e4"),
     Cite2Urn("urn:cite2:hmt:iliadindex.v1:u4"),
     Cite2Urn("urn:cite2:hmt:iliadindex.v1:msB")
     ]
-    @test collectionurns_for_model(s, dm) == expected
-    @test collectionurns_for_model(blocks(s), dm) == expected
-    @test collectionurns_for_model(s, dm, StringReader) == expected
-    @test collectionurns_for_model(f, dm, FileReader) == expected
-    @test collectionurns_for_model(u, dm, UrlReader) == expected
+    @test implementations(s, dm) == expected
+    @test implementations(blocks(s), dm) == expected
+    @test implementations(s, dm, StringReader) == expected
+    @test implementations(f, dm, FileReader) == expected
+    @test implementations(u, dm, UrlReader) == expected
 end
     
 @testset "Test finding data in CEX for a data model" begin
-    f = joinpath(pwd(), "data", "hmt-2022j.cex")
+    f = joinpath(pwd(), "data", "hmt-2022k.cex")
     s = read(f) |> String
-    u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022j.cex"
+    u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022k.cex"
     dm = Cite2Urn("urn:cite2:hmt:datamodels.v1:codexmodel")
 
-    expected = 3866
+    expected = 4254
     @test data_for_model(s, dm) |> length == expected
     @test data_for_model(blocks(s), dm) |> length == expected
+    @test data_for_model(s, dm, StringReader) |> length == expected
     @test data_for_model(f, dm, FileReader) |> length == expected
+    @test data_for_model(u, dm, UrlReader) |> length == expected
+end
+
+@testset "Test find CITE relation set data" begin
+    f = joinpath(pwd(), "data", "hmt-2022k.cex")
+    s = read(f) |> String
+    u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022k.cex"
+
+    #Find relations in a specific set object: 
+    relobj = Cite2Urn("urn:cite2:hmt:iliadindex.v1:e4")
+    expected_e4 = 15633
+    s_rels = relations(s, relobj) |> length
+    b_rels = relations(blocks(s), relobj) |> length
+    f_rels = relations(f, relobj, FileReader) |> length
+    u_rels = relations(u, relobj, UrlReader) |> length
+
+    @test s_rels == expected_e4
+    @test b_rels == expected_e4
+    @test f_rels == expected_e4
+    @test u_rels == expected_e4
+
+    #Find all sets in a collection
+    expected_all = 38115
+    s_rels_all = relations(s, dropobject(relobj)) |> length
+    b_rels_all = relations(blocks(s), dropobject(relobj)) |> length
+    f_rels_all = relations(f, dropobject(relobj), FileReader) |> length
+    u_rels_all = relations(u, dropobject(relobj), UrlReader) |> length
+
+    @test s_rels_all == expected_all
+    @test b_rels_all == expected_all
+    @test f_rels_all == expected_all
+    @test u_rels_all == expected_all
+
+    #Find by data model: urn:cite2:hmt:datamodels.v1:textonpage:
+    dm = Cite2Urn("urn:cite2:hmt:datamodels.v1:textonpage")
+    s_model = relations_for_model(s, dm) |> length
+    b_model = relations_for_model(blocks(s), dm) |> length
+    f_model = relations_for_model(f, dm, FileReader) |> length
+    u_model = relations_for_model(u, dm, UrlReader) |> length
+
+    @test s_model === expected_all
+    @test b_model === expected_all
+    @test f_model === expected_all
+    @test u_model === expected_all
 end
