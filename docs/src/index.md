@@ -11,7 +11,17 @@ using CitableObject
 urn = Cite2Urn("urn:cite2:hmt:msA.v1:12r")
 ```
 
+## The `CexUtils` submodule
+
+CEX is a plain-text format for organizing citable data.  The `CexUtils` submodule 
+provides functions using `Cite2Urn`s to identify and extract data from CEX sources.
+
+
+## Contents
+
+
 The following pages include:
 
 1. a brief user's guide to working with `Cite2Urn`s
-2. API documentation of public functions and types
+2. an overview of the `CexUtils` submodule
+3. API documentation of public functions and types
