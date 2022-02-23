@@ -19,11 +19,12 @@ makedocs(
     pages = [
         "Overview" => "index.md",
         "User's guide" => Any[
-            "The Cite2Urn" => "guide.md",
-            "The CitableByCite2Urn trait" => "trait.md"
+            "The Cite2Urn" => "guide.md"
         ],
         "The CexUtils module" => Any[
-            "CEX utilities" => "cexutils/index.md"
+            "CEX utilities" => "cexutils/index.md",
+            "Citable collections" => "cexutils/collections.md",
+            "Citable relation sets" => "cexutils/relations.md"
         ],
         "API documentation" => "apis.md"
     ]

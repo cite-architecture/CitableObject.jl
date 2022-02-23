@@ -1,7 +1,7 @@
 @testset "Test retrieving properties from CEX by Cite2Urn" begin
-    f = joinpath(pwd(), "data", "hmt-2022j.cex")
+    f = joinpath(pwd(), "data", "hmt-2022k.cex")
     s = read(f) |> String
-    u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022j.cex" 
+    u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022k.cex" 
     msbimg = Cite2Urn("urn:cite2:hmt:msB.v1:")
 
     expected = [
@@ -20,9 +20,9 @@ end
 
 
 @testset "Test retrieving CITE data from CEX by Cite2Urn" begin
-    f = joinpath(pwd(), "data", "hmt-2022j.cex")
+    f = joinpath(pwd(), "data", "hmt-2022k.cex")
     s = read(f) |> String
-    u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022j.cex" 
+    u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022k.cex" 
     msbimg = Cite2Urn("urn:cite2:hmt:msB.v1:")
 
     expectedlength = 683
@@ -36,30 +36,38 @@ end
 
 
 @testset "Test finding collections for data model in CEX" begin
-    f = joinpath(pwd(), "data", "hmt-2022j.cex")
+    f = joinpath(pwd(), "data", "hmt-2022k.cex")
     s = read(f) |> String
-    u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022j.cex"
+    u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022k.cex"
     dm = Cite2Urn("urn:cite2:hmt:datamodels.v1:textonpage")
     expected = [
     Cite2Urn("urn:cite2:hmt:iliadindex.v1:e4"),
     Cite2Urn("urn:cite2:hmt:iliadindex.v1:u4"),
     Cite2Urn("urn:cite2:hmt:iliadindex.v1:msB")
     ]
-    @test collectionurns_for_model(s, dm) == expected
-    @test collectionurns_for_model(blocks(s), dm) == expected
-    @test collectionurns_for_model(s, dm, StringReader) == expected
-    @test collectionurns_for_model(f, dm, FileReader) == expected
-    @test collectionurns_for_model(u, dm, UrlReader) == expected
+    @test implementations(s, dm) == expected
+    @test implementations(blocks(s), dm) == expected
+    @test implementations(s, dm, StringReader) == expected
+    @test implementations(f, dm, FileReader) == expected
+    @test implementations(u, dm, UrlReader) == expected
 end
     
 @testset "Test finding data in CEX for a data model" begin
-    f = joinpath(pwd(), "data", "hmt-2022j.cex")
+    f = joinpath(pwd(), "data", "hmt-2022k.cex")
     s = read(f) |> String
-    u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022j.cex"
+    u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022k.cex"
     dm = Cite2Urn("urn:cite2:hmt:datamodels.v1:codexmodel")
 
-    expected = 3866
+    expected = 4254
     @test data_for_model(s, dm) |> length == expected
     @test data_for_model(blocks(s), dm) |> length == expected
+    @test data_for_model(s, dm, StringReader) |> length == expected
     @test data_for_model(f, dm, FileReader) |> length == expected
+    @test data_for_model(u, dm, UrlReader) |> length == expected
+end
+
+@testset "Test find CITE relation set data" begin
+    #Find specific set object: urn:cite2:hmt:iliadindex.v1:e4
+    #Find set collection: urn:cite2:hmt:iliadindex.v1:
+    #Find by data model: urn:cite2:hmt:datamodels.v1:textonpage:
 end

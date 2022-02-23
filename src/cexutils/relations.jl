@@ -1,8 +1,18 @@
 using CitableObject
 using CiteEXchange
 
+
+#=
+#!citerelationset
+urn|urn:cite2:hmt:hmtdse.v1:
+label|Homer Multitext project indexing of digital scholarly editions
+passage|imageroi|surface
+urn:cts:greekLit:tlg0012.tlg001.e3:8.1|urn:cite2:hmt:e3bifolio.v1:E3_97bisv_98r@0.501,0.3063,0.224,0.043$
+
+=#
 """DOCUMENT ME"""
 function relations(s::AbstractString, u::Cite2Urn)
+    ustring = string(u)
     "Get relations"
 end
 
