@@ -47,6 +47,7 @@ urnsimilar
 ```@docs
 CitableObject.CexUtils.properties
 CitableObject.CexUtils.collectiondata
-CitableObject.CexUtils.relations
 CitableObject.CexUtils.implementations
+CitableObject.CexUtils.data_for_model
+CitableObject.CexUtils.relations_for_model
 ```
