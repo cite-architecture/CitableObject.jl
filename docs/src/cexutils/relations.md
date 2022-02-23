@@ -62,7 +62,7 @@ s_relations == b_relations ==  f_relations == u_relations
 
 ##  Collect relations data implementing a data model
 
-Like any other citable collection, collections of relation sets can be associated with a data model.  Use the `relations_for_model` function to collect all relations for relation sets implementing a model.
+Like any other citable collection, collections of relation sets can be associated with a data model.  Use the `relations_for_model` function to collect all relations for relation sets implementing a model.  In our sample data set, all the relation ssets implementing the "Text on page" model belong to the same citable collection, so the results will be identical to the previous examples.
 
 
 
