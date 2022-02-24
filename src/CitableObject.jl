@@ -61,6 +61,7 @@ module CexUtils
     include("cexutils/relationsdata.jl")
     include("cexutils/cataloglabels.jl")
     include("cexutils/relationslabel.jl")
+    include("cexutils/citeids.jl")
     
 
     export properties

@@ -3,14 +3,14 @@
     s = read(f) |> String
     u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022k.cex" 
 
-    msbimg = Cite2Urn("urn:cite2:hmt:msB.v1:")
+    msb = Cite2Urn("urn:cite2:hmt:msB.v1:")
     expected = "Venetus B manuscript"
 
-    @test cataloglabel(s, msbimg) == expected
-    @test cataloglabel(blocks(s), msbimg) == expected
-    @test cataloglabel(f, msbimg, FileReader) == expected
-    @test cataloglabel(u, msbimg, UrlReader) == expected
-    @test cataloglabel(s, msbimg, StringReader) == expected
+    @test cataloglabel(s, msb) == expected
+    @test cataloglabel(blocks(s), msb) == expected
+    @test cataloglabel(f, msb, FileReader) == expected
+    @test cataloglabel(u, msb, UrlReader) == expected
+    @test cataloglabel(s, msb, StringReader) == expected
     
 end
 

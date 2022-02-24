@@ -79,3 +79,29 @@ f_modeldata = relations_for_model(f, model, FileReader)
 u_modeldata = relations_for_model(u, model, UrlReader)
 s_modeldata == b_modeldata ==  f_modeldata == u_modeldata
 ```
+
+
+
+
+
+### Find a human-readable label for a relation set
+
+
+The `relationsetlabel` function finds the description property of an individual relation set.
+
+  
+```@example cexutils
+dseurn = Cite2Urn("urn:cite2:hmt:hmtdse.v1:all")
+s_label = relationsetlabel(s, dseurn)
+```
+
+Or from any other source:
+
+```@example cexutils
+b_label = relationsetlabel(blocks(s), dseurn)
+f_label = relationsetlabel(f, dseurn, FileReader)
+u_label = relationsetlabel(u, dseurn, UrlReader)
+s_label == b_label == f_label == u_label
+
+
+### Find URN/label pairs for relation set implementing a data model

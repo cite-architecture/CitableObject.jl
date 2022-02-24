@@ -121,4 +121,20 @@ s_implementingdata == b_implementingdata == f_implementingdata == u_implementing
 
 ### Find a human-readable label for a collection
 
-### Find a URN/label pairs for collections implementing a data model
+The `cataloglabel` function finds the description property of the catalog entry for a given collection.  (If the collection is not cataloged, it generates a generic label.)
+
+  
+```@example cexutils
+msb = Cite2Urn("urn:cite2:hmt:msB.v1:")
+s_label = cataloglabel(s, msb)
+```
+
+Or from any other source:
+
+```@example cexutils
+b_label = cataloglabel(blocks(s), msb)
+f_label = cataloglabel(f, msb, FileReader)
+u_label = cataloglabel(u, msb, UrlReader)
+s_label == b_label == f_label == u_label
+```
+### Find URN/label pairs for collections implementing a data model
