@@ -65,13 +65,11 @@ s_relations == b_relations ==  f_relations == u_relations
 Like any other citable collection, collections of relation sets can be associated with a data model.  Use the `relations_for_model` function to collect all relations for relation sets implementing a model.  In our sample data set, all the relation ssets implementing the "Text on page" model belong to the same citable collection, so the results will be identical to the previous examples.
 
 
-
 ```@example relsets
 model = Cite2Urn("urn:cite2:hmt:datamodels.v1:textonpage")
 s_modeldata = relations_for_model(s, model)
 length(s_modeldata)
 ```
-
 
 ```@example relsets
 b_modeldata = relations_for_model(blocks(s), model)
@@ -79,3 +77,23 @@ f_modeldata = relations_for_model(f, model, FileReader)
 u_modeldata = relations_for_model(u, model, UrlReader)
 s_modeldata == b_modeldata ==  f_modeldata == u_modeldata
 ```
+
+### Find a human-readable label for a relation set
+
+The `relationsetlabel` function finds the description property of an individual relation set.
+
+```@example relsets
+dseurn = Cite2Urn("urn:cite2:hmt:hmtdse.v1:all")
+s_label = relationsetlabel(s, dseurn)
+```
+
+Or from any other source:
+
+```@example relsets
+b_label = relationsetlabel(blocks(s), dseurn)
+f_label = relationsetlabel(f, dseurn, FileReader)
+u_label = relationsetlabel(u, dseurn, UrlReader)
+s_label == b_label == f_label == u_label
+```
+
+### Find URN/label pairs for relation set implementing a data model
