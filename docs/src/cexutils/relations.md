@@ -90,14 +90,14 @@ s_modeldata == b_modeldata ==  f_modeldata == u_modeldata
 The `relationsetlabel` function finds the description property of an individual relation set.
 
   
-```@example cexutils
+```@example relsets
 dseurn = Cite2Urn("urn:cite2:hmt:hmtdse.v1:all")
 s_label = relationsetlabel(s, dseurn)
 ```
 
 Or from any other source:
 
-```@example cexutils
+```@example relsets
 b_label = relationsetlabel(blocks(s), dseurn)
 f_label = relationsetlabel(f, dseurn, FileReader)
 u_label = relationsetlabel(u, dseurn, UrlReader)
