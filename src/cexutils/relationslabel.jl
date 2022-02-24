@@ -49,21 +49,17 @@ function relationsetlabel(filesrc::AbstractString, u::Cite2Urn, freader::Type{Fi
     relationsetlabel(s, u)
 end
 
-
-#=
-"""Find catalog label, if any, in CEX at URL `url` contained by `u`.
+"""Find label for single relation set uniquely identifed by `u` at URL `url`.
 $(SIGNATURES)
 """
-function cataloglabel(url::AbstractString, u::Cite2Urn, freader::Type{UrlReader})
+function relationsetlabel(url::AbstractString, u::Cite2Urn, freader::Type{UrlReader})
     s = Downloads.download(url) |> read |> String
-    cataloglabel(s, u)
+    relationsetlabel(s, u)
 end
 
-"""Find catalog label, if any, in CEX at URL `url` contained by `u`.
+"""Find label for single relation set uniquely identifed by `u`.
 $(SIGNATURES)
 """
-function cataloglabel(s::AbstractString, u::Cite2Urn, sreader::Type{StringReader})
-    cataloglabel(s, u)
+function relationsetlabel(s::AbstractString, u::Cite2Urn, sreader::Type{StringReader})
+    relationsetlabel(s, u)
 end
-
-=#

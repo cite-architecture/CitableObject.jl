@@ -25,6 +25,8 @@ end
 
     @test relationsetlabel(s, dseurn) == expected
     @test relationsetlabel(blocks(s), dseurn) == expected
-    @test relationsetlabel(f, dseurn, FioelReader) == expected
+    @test relationsetlabel(f, dseurn, FileReader) == expected
+    @test relationsetlabel(u, dseurn, UrlReader) == expected
+    @test relationsetlabel(s, dseurn, StringReader) == expected
 
 end
