@@ -46,7 +46,6 @@ end
     @test c1.urn == Cite2Urn("urn:cite2:citebl:burney86pages.v1:")
     @test c1.label == "Burney 86 manuscript"
 
-
     @test codexids == citeids(blocks(s), codmod)
     @test codexids == citeids(f, codmod, FileReader)
     @test codexids == citeids(u, codmod, UrlReader)
@@ -54,6 +53,15 @@ end
     
     # Relation set model:
     txtonpage = Cite2Urn("urn:cite2:hmt:datamodels.v1:textonpage") 
+    dsecollections = citeids(s, txtonpage)
+    @test length(dsecollections) == 3
 
+    dse1 = dsecollections[1]
+    @test dse1.urn == Cite2Urn("urn:cite2:hmt:iliadindex.v1:e4")
+    @test dse1.label == "Index of *Iliad* lines to pages where they appear in the Escorial Omega 1.12 manuscript"
 
+    @test dsecollections == citeids(blocks(s), txtonpage)
+    @test dsecollections == citeids(f, txtonpage, FileReader)
+    @test dsecollections == citeids(u, txtonpage, UrlReader)
+    @test dsecollections == citeids(s, txtonpage, StringReader)
 end
