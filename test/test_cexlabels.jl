@@ -8,11 +8,8 @@
 
     @test cataloglabel(s, msbimg) == expected
     @test cataloglabel(blocks(s), msbimg) == expected
-    #=
-    @test properties(s, msbimg) ==  expected
-    @test properties(blocks(s), msbimg) == expected
-    @test properties(f, msbimg, FileReader) == expected
-    @test properties(u, msbimg, UrlReader) == expected
-    @test properties(s, msbimg, StringReader) ==  expected 
-    =#
+    @test cataloglabel(f, msbimg, FileReader) == expected
+    @test cataloglabel(u, msbimg, UrlReader) == expected
+    @test cataloglabel(s, msbimg, StringReader) == expected
+    
 end
