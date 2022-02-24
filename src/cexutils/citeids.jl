@@ -1,8 +1,6 @@
 using CitableObject
 using CiteEXchange
 
-
-
 """Find a urn/label pair for a collection or relation set
 identified by `u`.
 $(SIGNATURES)
@@ -35,8 +33,6 @@ function citeid(blks::Vector{Block}, u::Cite2Urn)
     end
     pair
 end
-
-
 
 """Find urn/label pairs for all collections or relation sets in `s`
 implementing `model`.
@@ -75,21 +71,19 @@ function citeids(filesrc::AbstractString, model::Cite2Urn, freader::Type{FileRea
     citeids(blks, model)
 end
 
-#=
-
-"""Find relations data for all relation sets from CEX at URL `url` contained by `u`.
+"""Find urn/label pairs for all collections or relation sets at URL `url`
+implementing `model`.
 $(SIGNATURES)
 """
-function relations(url::AbstractString, u::Cite2Urn, freader::Type{UrlReader})
-    blks =  s = Downloads.download(url) |> read |> String |> blocks
-    relations(blks, u)
+function citeids(url::AbstractString, model::Cite2Urn, freader::Type{UrlReader})
+    blks = Downloads.download(url) |> read |> String |> blocks
+    citeids(blks, model)
 end
 
-"""Find relations data for all relation sets in `s` contained by `u`.
+"""Find urn/label pairs for all collections or relation sets in `s`
+implementing `model`.
 $(SIGNATURES)
 """
-function relations(s::AbstractString, u::Cite2Urn, freader::Type{StringReader})
-    relations(s, u)
+function citeids(s::AbstractString, model::Cite2Urn, freader::Type{StringReader})
+    citeids(s, model)
 end
-
-=#

@@ -42,7 +42,7 @@ end
 $(SIGNATURES)
 """
 function relations_for_model(url::AbstractString, dm::Cite2Urn, freader::Type{UrlReader})
-    blks =  s = Downloads.download(url) |> read |> String |> blocks
+    blks = Downloads.download(url) |> read |> String |> blocks
     relations_for_model(blks, dm)
 end
 

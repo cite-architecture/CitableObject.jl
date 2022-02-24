@@ -50,7 +50,7 @@ end
 $(SIGNATURES)
 """
 function relations(url::AbstractString, u::Cite2Urn, freader::Type{UrlReader})
-    blks =  s = Downloads.download(url) |> read |> String |> blocks
+    blks = Downloads.download(url) |> read |> String |> blocks
     relations(blks, u)
 end
 
