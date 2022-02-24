@@ -118,3 +118,7 @@ f_implementingdata = data_for_model(f, model, FileReader)
 u_implementingdata =  data_for_model(u, model, UrlReader)
 s_implementingdata == b_implementingdata == f_implementingdata == u_implementingdata
 ```
+
+### Find a human-readable label for a collection
+
+### Find a URN/label pairs for collections implementing a data model

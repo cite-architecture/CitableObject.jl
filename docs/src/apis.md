@@ -44,10 +44,18 @@ urnsimilar
 
 ## `CexUtils` submodule
 
+Finding data by URN value:
+
 ```@docs
 CitableObject.CexUtils.properties
 CitableObject.CexUtils.collectiondata
 CitableObject.CexUtils.implementations
 CitableObject.CexUtils.data_for_model
 CitableObject.CexUtils.relations_for_model
+```
+
+Finding human-readable labels by URN value:
+
+```@docs
+CitableObject.CexUtils.cataloglabel
 ```

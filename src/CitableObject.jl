@@ -59,6 +59,7 @@ module CexUtils
     include("cexutils/modelsdata.jl")
     include("cexutils/relations.jl")
     include("cexutils/relationsdata.jl")
+    include("cexutils/labelling.jl")
     
 
     export properties
@@ -67,5 +68,7 @@ module CexUtils
     export data_for_model
     export relations
     export relations_for_model
+    export cataloglabel
+    export citeids 
 end # submodule
 end # module 
