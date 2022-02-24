@@ -1,8 +1,6 @@
 using CitableObject
 using CiteEXchange
 
-
-
 """Find label for single relation set uniquely identifed by `u` in CEX source `s`.
 If no catalog found, compose machine-generated label.
 $(SIGNATURES)
@@ -11,10 +9,7 @@ function relationsetlabel(s::AbstractString, u::Cite2Urn; delimiter = "|")
     relationsetlabel(blocks(s, "citerelationset"), u)
 end
 
-
-
 """Find label for single relation set uniquely identifed by `u` in CEX source `s`.
-If no catalog found, compose machine-generated label.
 $(SIGNATURES)
 """
 function relationsetlabel(blks::Vector{Block}, u::Cite2Urn; delimiter = "|")
@@ -37,3 +32,38 @@ function relationsetlabel(blks::Vector{Block}, u::Cite2Urn; delimiter = "|")
     end
     lbl
 end
+
+"""Dispatch `relationsetlabel` on `T`.
+
+$(SIGNATURES)
+"""    
+function relationsetlabel(cexsrc::AbstractString, u::Cite2Urn, reader::T) where {T <: ReaderType}
+    relationsetlabel(cexsrc, u, T)
+end
+
+"""Find label for single relation set uniquely identifed by `u` in CEX source `s`.
+$(SIGNATURES)
+"""
+function relationsetlabel(filesrc::AbstractString, u::Cite2Urn, freader::Type{FileReader})
+    s = read(filesrc) |> String
+    relationsetlabel(s, u)
+end
+
+
+#=
+"""Find catalog label, if any, in CEX at URL `url` contained by `u`.
+$(SIGNATURES)
+"""
+function cataloglabel(url::AbstractString, u::Cite2Urn, freader::Type{UrlReader})
+    s = Downloads.download(url) |> read |> String
+    cataloglabel(s, u)
+end
+
+"""Find catalog label, if any, in CEX at URL `url` contained by `u`.
+$(SIGNATURES)
+"""
+function cataloglabel(s::AbstractString, u::Cite2Urn, sreader::Type{StringReader})
+    cataloglabel(s, u)
+end
+
+=#

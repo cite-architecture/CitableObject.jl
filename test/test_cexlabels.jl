@@ -25,5 +25,6 @@ end
 
     @test relationsetlabel(s, dseurn) == expected
     @test relationsetlabel(blocks(s), dseurn) == expected
+    @test relationsetlabel(f, dseurn, FioelReader) == expected
 
 end
