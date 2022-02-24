@@ -13,3 +13,16 @@
     @test cataloglabel(s, msbimg, StringReader) == expected
     
 end
+
+
+@testset "Test retrieving labels for relation sets" begin
+    f = joinpath(pwd(), "data", "hmt-2022k.cex")
+    s = read(f) |> String
+    u = "https://raw.githubusercontent.com/cite-architecture/CitableObject.jl/main/test/data/hmt-2022k.cex" 
+
+    
+    expected = "Homer Multitext project indexing of digital scholarly editions"
+
+    @test relationsetlabel(s, dseurn) == expected
+
+end
