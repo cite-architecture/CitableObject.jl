@@ -55,6 +55,7 @@ module CexUtils
 
     include("cexutils/properties.jl")
     include("cexutils/collections.jl")
+    include("cexutils/columnindex.jl")
     include("cexutils/models.jl")
     include("cexutils/modelsdata.jl")
     include("cexutils/relations.jl")
@@ -66,6 +67,8 @@ module CexUtils
 
     export properties
     export collectiondata
+    export collectionblock
+    export columnindex
     export implementations
     export data_for_model
     export relations
