@@ -82,7 +82,7 @@ function collectiondata(url::AbstractString, u::Cite2Urn, ureader::Type{UrlReade
     collectiondata(s, u, delimiter = delimiter)
 end
 
-"""Find all property definitions in CEX at URL `url` contained by `u`.
+"""Find all datalines in CEX `s` contained by `u`.
 $(SIGNATURES)
 """
 function collectiondata(s::AbstractString, u::Cite2Urn, sreader::Type{StringReader}; delimiter = "|")
