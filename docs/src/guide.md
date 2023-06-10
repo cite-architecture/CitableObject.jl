@@ -147,12 +147,12 @@ isrange(pages)
 
 
 ```@example urn
-rangebegin(pages)
+range_begin(pages)
 ```
 
 
 ```@example urn
-rangeend(pages)
+range_end(pages)
 ```
 
 
