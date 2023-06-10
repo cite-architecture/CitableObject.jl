@@ -5,15 +5,11 @@ import Base: show
 
 using CitableBase 
 
-import CitableBase: supportsversion
-import CitableBase: dropversion
-import CitableBase: addversion
-import CitableBase: versionid
+import CitableBase: supportsversion, versionid
+import CitableBase: addversion, dropversion
 
 import CitableBase: supportssubref
-import CitableBase: dropsubref
-import CitableBase: hassubref
-import CitableBase: subref
+
 
 import CitableBase: urncomparisontrait
 import CitableBase: urnequals
@@ -28,15 +24,13 @@ export validurn, namespace, collectioncomponent, objectcomponent
 export collectionid, versionid, propertyid
 export dropobject, addobject
 export dropproperty, addproperty
-export isrange, rangebegin, rangeend
+
 
 include("cite2urn.jl")
 include("validurn.jl")
 include("urn_components.jl")
 include("urnparts.jl")
 include("urn_manipulation.jl")
-include("ranges.jl")
-include("subreferences.jl")
 include("urn_comparison.jl")
 
 
@@ -65,6 +59,7 @@ module CexUtils
     include("cexutils/citeids.jl")
     
 
+    export Block
     export properties
     export collectiondata
     export collectionblock

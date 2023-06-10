@@ -13,7 +13,6 @@ function dropversion(u::Cite2Urn)::Cite2Urn
     objpart = objectcomponent(u)
     isnothing(objpart) ? push!(save, "") : push!(save, objpart)
     join(save, ":") |> Cite2Urn
-
 end
 
 

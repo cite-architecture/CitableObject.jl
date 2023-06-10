@@ -20,8 +20,8 @@ namespace
 collectioncomponent
 objectcomponent
 isrange
-rangebegin
-rangeend
+range_begin
+range_end
 supportssubref
 hassubref
 subref
